@@ -31,8 +31,8 @@ export const SidebarData = [
 	],
 },
 {
-	title: "Patients",
-	path: "/patient",
+	title: "Users",
+	path: "/users",
 	icon: <FaIcons.FaUsers/>,
 },
 {
@@ -45,72 +45,14 @@ export const SidebarData = [
 	subNav: [
 	{
 		title: "Profile",
-		path: "/about-us/aim",
+		path: "#",
 		icon: <IoIcons.IoIosPerson />,
 	},
 	{
 		title: "LogOut",
-		path: "/about-us/vision",
+		path: "#",
 		icon: <IoIcons.IoIosLogOut />,
 	},
 	],
 },
-// {
-// 	title: "Services",
-// 	path: "/services",
-// 	icon: <IoIcons.IoIosPaper />,
-// 	iconClosed: <RiIcons.RiArrowDownSFill />,
-// 	iconOpened: <RiIcons.RiArrowUpSFill />,
-
-// 	subNav: [
-// 	{
-// 		title: "Service 1",
-// 		path: "/services/services1",
-// 		icon: <IoIcons.IoIosPaper />,
-// 		cName: "sub-nav",
-// 	},
-// 	{
-// 		title: "Service 2",
-// 		path: "/services/services2",
-// 		icon: <IoIcons.IoIosPaper />,
-// 		cName: "sub-nav",
-// 	},
-// 	{
-// 		title: "Service 3",
-// 		path: "/services/services3",
-// 		icon: <IoIcons.IoIosPaper />,
-// 	},
-// 	],
-// },
-// {
-// 	title: "Contact",
-// 	path: "/contact",
-// 	icon: <FaIcons.FaPhone />,
-// },
-// {
-// 	title: "Events",
-// 	path: "/events",
-// 	icon: <FaIcons.FaEnvelopeOpenText />,
-
-// 	iconClosed: <RiIcons.RiArrowDownSFill />,
-// 	iconOpened: <RiIcons.RiArrowUpSFill />,
-
-// 	subNav: [
-// 	{
-// 		title: "Event 1",
-// 		path: "/events/events1",
-// 		icon: <IoIcons.IoIosPaper />,
-// 	},
-// 	{
-// 		title: "Event 2",
-// 		path: "/events/events2",
-// 		icon: <IoIcons.IoIosPaper />,
-// 	},
-// 	],
-// },
-// {
-// 	title: "Support",
-// 	path: "/support",
-// 	icon: <IoIcons.IoMdHelpCircle />,
-// },
 ];

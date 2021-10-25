@@ -4,7 +4,6 @@ import { Container, Row, Col, Table, Button, Media, Card, CardBody } from "react
 
 const DoctorProfile = () => {
 
-
 	// Doctor Profile records
 	const arr = [
 		{
