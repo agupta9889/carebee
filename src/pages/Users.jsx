@@ -73,7 +73,7 @@ function User() {
 
 
 	return (
-		<>
+	
 			<Container>
 				<Row>
 					<Col md={2} xs={1}></Col>
@@ -114,7 +114,7 @@ function User() {
 					<Col xs={1}></Col>
 				</Row>
 			</Container>
-		</>
+		
 	);
 }
 

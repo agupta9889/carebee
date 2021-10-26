@@ -118,7 +118,7 @@ const ManageDoctor = () => {
 	}, [])
 
 return (
-	<>
+
 		<Container >
 			<Row >
 				<Col md={2} xs={1}></Col>
@@ -164,7 +164,7 @@ return (
 				<Col xs={1}></Col>
 			</Row>
 		</Container>
-	</>
+
 );
 };
 

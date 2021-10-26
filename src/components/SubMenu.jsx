@@ -45,6 +45,9 @@ const [subnav, setSubnav] = useState(false);
 
 const showSubnav = () => setSubnav(!subnav);
 
+const logout = () => {
+	localStorage.clear()
+}
 return (
 	<>
 	<SidebarLink to={item.path}
@@ -64,7 +67,7 @@ return (
 	{subnav &&
 		item.subNav.map((item, index) => {
 		return (
-			<DropdownLink to={item.path} key={index}>
+			<DropdownLink to={item.path} key={index} onClick={()=>item.title === 'LogOut' ? logout(): console.log("logout fail")}>
 			{item.icon}
 			<SidebarLabel>{item.title}</SidebarLabel>
 			</DropdownLink>

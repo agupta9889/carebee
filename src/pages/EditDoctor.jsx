@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } 
 
 export const EditDoctor = () => {
 return (
-	<>
+
 		<Container >
 			<Row >
 				<Col md={2} xs={1}></Col>
@@ -106,7 +106,7 @@ return (
 			<Col xs={1}></Col>
 			</Row>
 		</Container>
-	</>	
+
 );
 };
 
