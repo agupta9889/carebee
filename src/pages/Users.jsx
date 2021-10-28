@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table} from "reactstrap";
 //Bootstrap and jQuery libraries
 import 'jquery/dist/jquery.min.js';
@@ -6,70 +6,50 @@ import 'jquery/dist/jquery.min.js';
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'; 
+import axios from "axios";
 
 
 function User() {
+
 	//initialize datatable
 	$(document).ready(function () {
-		$('#patientTable').DataTable();
+		$('#patientTable1').DataTable();
 	});
 
-	const arr = [
-		{
-			name: 'Ankit',
-			mobile: '9889286610',
-			email: 'ankit@gmail.com',
-			gender: 'Male',
-			age: '26',
-			height: '5.3',
-			weight: '62'
-		},
-		{
-			name: 'Arun',
-			mobile: '9889286611',
-			email: 'arun@gmail.com',
-			gender: 'Male',
-			age: '28',
-			height: '5.4',
-			weight: '65'
-		},
-		{
-			name: 'Rajeev',
-			mobile: '9889286612',
-			email: 'rajeev@gmail.com',
-			gender: 'Male',
-			age: '28',
-			height: '5.3',
-			weight: '68'
-		},
-		{
-			name: 'Prathvi',
-			mobile: '9889286613',
-			email: 'prathvi@gmail.com',
-			gender: 'Male',
-			age: '23',
-			height: '6',
-			weight: '52'
-		},
-		{
-			name: 'Nitin',
-			mobile: '9889286614',
-			email: 'nitin@gmail.com',
-			gender: 'Male',
-			age: '28',
-			height: '6.1',
-			weight: '70'
-		},
-		{
-			name: 'Princy',
-			mobile: '9889286615',
-			email: 'princy@gmail.com',
-			gender: 'Female',
-			age: '29',
-			height: '5.3',
-			weight: '60'
-		},
-	];
+	// User API Integration
+	const [data, setdata] = useState();
+
+	useEffect(() => {
+		getUserDetails();
+	}, []);
+
+	const getUserDetails = async () => {
+
+		var data = JSON.stringify({
+			"email": "p34892@gmail.com",
+			"type": "USER"
+		  });
+		  
+		  var config = {
+			method: 'get',
+			url: 'http://192.168.1.29:5000/api/user/login/getUser',
+			headers: { 
+			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+			  'Content-Type': 'application/json'
+			},
+			data : data
+		  };
+		  
+		  axios(config)
+		  .then(response => {
+			  console.log("response in user data::: ", response.data.data);
+			  const filterUser = response.data.data.filter(user => user.type === 'USER');
+			  setdata(filterUser)
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+	}
 
 
 	return (
@@ -78,12 +58,12 @@ function User() {
 				<Row>
 					<Col md={2} xs={1}></Col>
 					<Col md={10} xs={10} className="table-container">
-						<h5>Patient Records</h5><hr />
+						<h5>User Records</h5><hr />
 						<Table id="patientTable" responsive>
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Patient Name</th>
+									<th>User Name</th>
 									<th>Phone</th>
 									<th>Email</th>
 									<th>Gender</th>
@@ -94,20 +74,28 @@ function User() {
 								</tr>
 							</thead>
 							<tbody>
-								{arr.map((i, index) => {
-									return (
-										<tr>
-											<th scope="row">{index + 1}</th>
-											<td>{i.name}</td>
-											<td>{i.mobile}</td>
-											<td>{i.email}</td>
-											<td>{i.gender}</td>
-											<td>{i.age} Years</td>
-											<td>{i.height} Inch</td>
-											<td>{i.weight} Kg</td>
-										</tr>
-									);
-								})}
+								{
+									data ? 
+									data.map((i, index) => {
+
+										return (
+											
+												<tr key={index}>
+
+													<th scope="row">{index + 1}</th>
+													<td>{i.first_name} {i.last_name}</td>
+													<td>{i.mobile}</td>
+													<td>{i.email}</td>
+													<td>{i.gender}</td>
+													<td>{i.age} Years</td>
+													<td>{i.height} Inch</td>
+													<td>{i.weight} Kg</td>
+												</tr>
+											
+										);
+									}) : 
+									null
+								}
 							</tbody>
 						</Table>
 					</Col>

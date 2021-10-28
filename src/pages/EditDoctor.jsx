@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export const EditDoctor = () => {
 return (

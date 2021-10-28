@@ -8,33 +8,24 @@ import EditDoctor from "./pages/EditDoctor";
 import DoctorProfile from "./pages/DoctorProfile";
 import User from "./pages/Users";
 import Login from "./login/Login";
-import Forgot from "./login/Forgot";
 import Dashboard from "./pages/Dashboard";
-
-
-// function setToken(userToken){
-// 	sessionStorage.setItem('token', JSON.stringify(userToken));
-// }
-// function getToken(){
-// 	const tokenString = sessionStorage.getItem('token');
-// 	const userToken = JSON.parse(tokenString);
-//   	return userToken?.token
-// }
 
 
 function App() {
 
 	const [token, setToken] = useState();
-	const [data, setdata] = useState()
+	
 	useEffect(() => {
 		const data = localStorage.getItem('userdata');
 		// console.log("data in effect :::: ",JSON.parse(data));
 		setToken(JSON.parse(data))
-	})
-  if(token) {
+	}, []);
+
+  	if(!token) {
+		return <Login setToken={setToken} />
+	}
 	return (
 		<>
-			{/* <Forgot /> */}
 			<Router>
 				<Sidebar />
 				<Switch>
@@ -49,9 +40,7 @@ function App() {
 			
 		</>
 	);
-  }
- 
-return <Login setToken={setToken} />
+  
 }
 
 export default App;

@@ -61,23 +61,31 @@ button.round.btn.btn-outline-danger{
    
     box-shadow: 0 0px 1px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 19%)
 }
-a.edit {
-    padding: 6px;
+button.edit {
+   
     color: #fff;
     background-color: #ffc107;
     border-color: #ffc107;
+    border-radius: 0px;
 }
-a.edit:hover{
+button.edit:hover{
     color:#fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    border-radius: 0px;
 }
-a.view {
-    padding: 6px;
+button.view {
+    
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    border-radius: 0px;
 }
-a.view:hover{
+button.view:hover{
     color: #fff;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    border-radius: 0px;
 }
 .media{
     display: flex;

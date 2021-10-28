@@ -13,12 +13,12 @@ function Forgot(){
         <Container className="login-container">  
             <Row>
                 <Col sm="6" className="ads">
-                    <img src={companyLogo} className="logo" />   
+                    <img src={companyLogo} className="logo"  alt="logo" />   
                 </Col>
                 <Col sm="6" >
                     <div className="login-form">
-                        <div class="profile-img">
-                            <img src={companyLogoIcon} className="logo-icon" />    
+                        <div className="profile-img">
+                            <img src={companyLogoIcon} className="logo-icon" alt="logo" />    
                         </div>
                         <h3>Forgot Password</h3>
                     </div>
@@ -30,7 +30,7 @@ function Forgot(){
                             <Button type="button" className="login-button btn btn-primary btn-lg btn-block">Submit</Button>
                         </FormGroup>
                         <FormGroup className="forget-password">
-                            <a href="#">Login</a>
+                            <a href="/login">Login</a>
                         </FormGroup>
                     </Form>
                 </Col>  

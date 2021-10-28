@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import * as FaIcons from "react-icons/fa";
 import { Container, Row, Col, Table, Button } from "reactstrap";
 //Bootstrap and jQuery libraries
@@ -7,115 +8,69 @@ import 'jquery/dist/jquery.min.js';
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'; 
-import swal from 'sweetalert';
+//import swal from 'sweetalert';
 
 const ManageDoctor = () => {
 
+	let history = useHistory();
+	function hundleDoctorEdit(data) {
+	 // console.log(data);
+     history.push("/edit-doctor");
+  }
+  function hundleDoctorInfo(data) {
+	 // console.log(data);
+     history.push("/doctor-profile");
+  }
+
 	//initialize datatable
     $(document).ready(function () {
-        $('#doctorTable').DataTable();
+        $('#doctorTable1').DataTable();
     });
 
 	// Sweet alert validation
-	const notify = () => swal({
-			title: "Are you sure?",
-			text: "Are you sure that you want to leave this page?",
-			icon: "warning",
-			dangerMode: true,
-		})
-	// Doctor records
-	const arr = [
-		{
-			name : 'Arun Gupta',
-			phone : '9889286601',
-			email : 'arun@gmail.com',
-			gender : 'Male',
-			status : 'Active'
+	// const notify = () => swal({
+	// 		title: "Are you sure?",
+	// 		text: "Are you sure that you want to leave this page?",
+	// 		icon: "warning",
+	// 		dangerMode: true,
+	// 	})
 
-		},
-		{
-			name : 'Rajeev',
-			phone : '9889286602',
-			email : 'rajeev@gmail.com',
-			gender : 'Male',
-			status : 'Inactive'
-		},
-		{
-			name : 'Princy',
-			phone : '9889286603',
-			email : 'princy@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Nitin',
-			phone : '9889286604',
-			email : 'nitin@gmail.com',
-			gender : 'Male',
-			status : 'Inactive'
-		},
-		{
-			name : 'Prathvi',
-			phone : '9889286605',
-			email : 'prathvi@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Kiran',
-			phone : '9889286605',
-			email : 'kiran@gmail.com',
-			gender : 'Female',
-			status : 'Inactive'
-		},
-		{
-			name : 'Arun Gupta',
-			phone : '9889286606',
-			email : 'arun@gmail.com',
-			gender : 'Male',
-			status : 'Active'
+	// API Integration
+	const [data, setstate] = useState();
 
-		},
-		{
-			name : 'Rajeev',
-			phone : '9889286607',
-			email : 'rajeev@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Princy',
-			phone : '9889286608',
-			email : 'princy@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Nitin',
-			phone : '9889286609',
-			email : 'nitin@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Prathvi',
-			phone : '98892866010',
-			email : 'prathvi@gmail.com',
-			gender : 'Male',
-			status : 'Active'
-		},
-		{
-			name : 'Nidhi',
-			phone : '98892866010',
-			email : 'nidhi@gmail.com',
-			gender : 'Female',
-			status : 'Active'
-		},
-	]
-	
 	useEffect(() => {
-		arr.map(i => console.log("item :: ",i))
-	}, [])
+		getDoctor();
+	}, []);
+		
+	const getDoctor = async () => {
+		
+		var axios = require('axios');
+		var data = JSON.stringify({
+		  "email": "p34892@gmail.com",
+		  "type": "USER"
+		});
+			
+		var config = {
+		  method: 'get',
+		  url: 'http://192.168.1.29:5000/api/user/login/getUser',
+		  headers: { 
+			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+			'Content-Type': 'application/json'
+		  },
+		  data : data
+		};
+		
+		axios(config)
+		.then(response => {
+		  console.log('Response in doctor data:::', response.data.data);
+		  const filterDoctor = response.data.data.filter(doctor => doctor.type ==='DOCTOR')
+		 setstate(filterDoctor);
+		})
+		.catch(function (error) {
+		  console.log(error);
+		});
+
+	}	
 
 return (
 
@@ -138,25 +93,31 @@ return (
 						</thead>
 						<tbody>
 							{
-								arr.map((i, index) => {
+								data ?
+								data.map((i, index) => {
 									//console.log('item ::: ');
 									 return(
-									<tr>
+									<tr key={index}>
 										<th scope="row">{index+1}</th>
-										<td>Dr. { i.name }</td>
-										<td>{i.phone}</td>
+										<td>Dr. { i.first_name } { i.last_name }</td>
+										<td>{i.mobile}</td>
 										<td>{i.email}</td>
 										<td>{i.gender}</td>
 										<td>{
-												(i.status === 'Active')
+												(i.status === 0)   // 0-Active, 1-Inactive
 												?<Button outline color="success" className="round btn-sm">Active</Button>
 												:<Button outline color="danger" className="round btn-sm">Inactive</Button>
 											}
 										</td>
-										<td className="text-center"><a href="/edit-doctor" className="edit"><FaIcons.FaPencilAlt /></a> <a href="/doctor-profile" onClick={notify} className="view"><FaIcons.FaEye /></a></td>
+										<td className="text-center">
+											<Button outline onClick={()=>hundleDoctorEdit(i)} className="edit"><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i)} className="view"><FaIcons.FaEye />
+											</Button>
+											
+										</td>
 									</tr>
-								 )
-								})
+								 );
+								}):
+								null
 							}
 						</tbody>
 					</Table>

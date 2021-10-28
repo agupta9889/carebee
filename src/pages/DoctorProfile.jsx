@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
-import * as FaIcons from "react-icons/fa";
-import { Container, Row, Col, Table, Button, Media, Card, CardBody } from "reactstrap";
+import React from "react";
+import { Container, Row, Col, Button, Media, Card, CardBody } from "reactstrap";
 
 const DoctorProfile = () => {
 
 	// Doctor Profile records
-	const arr = [
-		{
-			name : 'Arun Gupta',
-			phone : '9889286601',
-			email : 'arun@gmail.com',
-			gender : 'Male',
-			status : 'Active'
+	// const arr = [
+	// 	{
+	// 		name : 'Arun Gupta',
+	// 		phone : '9889286601',
+	// 		email : 'arun@gmail.com',
+	// 		gender : 'Male',
+	// 		status : 'Active'
 
-		},
-	]
+	// 	},
+	// ]
 	
-	useEffect(() => {
-		arr.map(i => console.log("item :: ",i))
-	}, [])
+	// useEffect(() => {
+	// 	arr.map(i => console.log("item :: ",i))
+	// }, [])
 
 return (
 	
@@ -29,8 +28,8 @@ return (
 					<Row>
 						<Col md={7} xs={12} >
 							<Media className="mb-2">
-								<a href="#" className="mr-1">
-									<img src="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/app-assets/images/portrait/small/avatar-s-26.png" alt="users view avatar" class="users-avatar-shadow rounded-circle" height="64" width="64"/>
+								<a href="/" className="mr-1">
+									<img src="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/app-assets/images/portrait/small/avatar-s-26.png" alt="users view avatar" className="users-avatar-shadow rounded-circle" height="64" width="64"/>
 								</a>
 								<Media body className="pt-25">
 									<Media heading>Dr. Princy Gupta</Media>
