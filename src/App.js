@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./assets/css/Style.css";
-import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AddDoctor from "./pages/AddDoctor";
 import ManageDoctor from "./pages/ManageDoctor";
@@ -27,9 +26,9 @@ function App() {
 	return (
 		<>
 			<Router>
-				<Sidebar />
 				<Switch>
-					<Route path="/" exact component={Dashboard} />
+					<Route path="/" exact component={Login} />
+					<Route path="/dashboard" exact component={Dashboard} />
 					<Route path="/add-doctor" exact component={AddDoctor} />
 					<Route path="/manage-doctor" exact component={ManageDoctor} />
 					<Route path="/edit-doctor" exact component={EditDoctor} />

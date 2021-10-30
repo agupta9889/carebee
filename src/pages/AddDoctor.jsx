@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Container, Row, Col, Button, FormGroup, Label, Input} from "reactstrap";
 import axios from "axios";
 import swal from "sweetalert";
+import Sidebar from "../components/Sidebar";
 
 export const AddDoctor = () => {
 
@@ -9,9 +10,34 @@ export const AddDoctor = () => {
 	const [last_name, setLastName] = useState();
 	const [mobile, setMobile] = useState();
 	const [email, setEmail] = useState();
-	const [gender, setGender] = useState('male');
+	const [gender, setGender] = useState('Male');
+	const [language, setLanguage] = useState('English');
+	const [qualification, setQualification] = useState();
+	const [specialities, setSpecialities] = useState();
+	const [experience, setExperience] = useState();
+	const [about, setAbout] = useState();
 
-	//console.log('adsfasdfasdfa:::::',first_name);
+	const validation = (value) =>{
+		
+		const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+		if(first_name && last_name && mobile && mobile.length == 10&& email && regex.test(email.toLowerCase()) 
+			&& gender && language && qualification && specialities && experience && about
+		){
+			//console.log("hello");
+			addUser();
+		} else{
+			//console.log("enter valid info");
+			swal({
+				title: "Warning!",
+				text: "Please fill the required field",
+				icon: "warning",
+				dangerMode: true,
+				timer: 3000
+			});
+		}
+		
+
+	}
 	
 	const addUser = async () =>{
 		
@@ -22,7 +48,11 @@ export const AddDoctor = () => {
 			"email": email,
 			"gender": gender,
 			"type": "DOCTOR",
-			"password": "doctor"
+			"language": language,
+			"qualification": qualification,
+			"specialities": specialities,
+			"experience": experience,
+			"about": about,
 		});
 
 		var config = {
@@ -44,26 +74,38 @@ export const AddDoctor = () => {
 			setMobile('');
 			setEmail('');
 			setGender('Male');
+			setLanguage('English');
+			setQualification('');
+			setSpecialities('');
+			setExperience('');
+			setAbout('');
 			// Sweet alert validation
 			swal({
 				title: "Success!",
 				text: "Records have been submitted successfully!",
 				icon: "success",
-			//	dangerMode: true,
-				confirmButtonColor: '#1672ec',
+				dangerMode: true,
+			//	confirmButtonColor: '#1672ec',
 				timer: 3000
 			});
 
 		})
 		.catch(function (error) {
 		console.log(error);
+			swal({
+				title: "Error!",
+				text: "Records have not been submitted!",
+				icon: "error",
+				dangerMode: true,
+				timer: 3000
+			});
 		});
 
 	}
-	
-	//console.log("gender before return ::: ",gender);
-return (
 
+return (
+	<>
+	<Sidebar />
 		<Container >
 			<Row >
 				<Col md={2} xs={1}></Col>
@@ -126,12 +168,12 @@ return (
 					<Col md={6}>
 						<FormGroup>
 							<Label>Language</Label>
-							<Input type="select" name="language" multiple>
-							<option>Hindi</option>
-							<option>English</option>
-							<option>Punjabi</option>
-							<option>Urdu</option>
-							<option>Gujrati</option>
+							<Input type="select" name="language" onChange={e=> setLanguage(e.target.value)} multiple={true}>
+								<option value="English">English</option>
+								<option value="Hindi" >Hindi</option>
+								<option value="Punjabi" >Punjabi</option>
+								<option value="Urdu" >Urdu</option>
+								<option value="Gujrati" >Gujrati</option>
 							</Input>
 						</FormGroup>
 					</Col>
@@ -140,33 +182,33 @@ return (
 					<Col md={4}>
 						<FormGroup>
 							<Label>Qualification</Label>
-							<Input type="text" name="qualification" placeholder="Qualification" />
+							<Input type="text" name="qualification" onChange={e=> setQualification(e.target.value)} value={qualification || ''} placeholder="Qualification" />
 						</FormGroup>
 					</Col>
 					<Col md={4}>
 						<FormGroup>
 							<Label>Specialities</Label>
-							<Input type="text" name="specialities" placeholder="Specialities" />
+							<Input type="text" name="specialities" onChange={e=> setSpecialities(e.target.value)} value={specialities || ''} placeholder="Specialities" />
 						</FormGroup>
 					</Col>
 					<Col md={4}>
 						<FormGroup>
 							<Label>Experience</Label>
-							<Input type="text" name="experience" placeholder="Experience" />
+							<Input type="text" name="experience" onChange={e=> setExperience(e.target.value)} value={experience || ''} placeholder="Experience" />
 						</FormGroup>
 					</Col>
 				</Row>
 				<FormGroup>
 					<Label>Bio-About</Label>
-					<Input type="textarea" name="bio" />
+					<Input type="textarea" name="about" onChange={e=> setAbout(e.target.value)} value={about || ''} />
 				</FormGroup>
-				<Button type="submit" onClick={addUser} >Submit</Button>
+				<Button type="submit" onClick={validation} >Submit</Button>
 			{/* </Form> */}
 			</Col>
 			<Col xs={1}></Col>
 			</Row>
 		</Container>
-	
+	</>
 );
 };
 

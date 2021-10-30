@@ -6,6 +6,8 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
+import { Button } from "reactstrap";
+import { data } from "jquery";
 
 
 const Nav = styled.div`
@@ -44,20 +46,29 @@ width: 100%;
 `;
 
 const Sidebar = () => {
-const [sidebar, setSidebar] = useState(true);
+	
+	const [sidebar, setSidebar] = useState(true);
+	const showSidebar = () => setSidebar(!sidebar);
 
-const showSidebar = () => setSidebar(!sidebar);
+	const logout = () => {
+		//alert('dfdfdsafdsafdsfdsfdsfdsfdsfdfdfdfds');
+		localStorage.clear();
+		window.location.href = "/";
+		
+	}
 
 return (
 	<>
 	<IconContext.Provider value={{ color: "#fff" }}>
 		<Nav>
-		<NavIcon to="#">
-			<FaIcons.FaBars onClick={showSidebar} />
-		</NavIcon>
-		<h1 style={{ textAlign: "center", marginLeft: "15%", color: "#fff" }}>
-			CareBee
-		</h1>
+			<NavIcon to="#">
+				<FaIcons.FaBars onClick={showSidebar} />
+			</NavIcon>
+			<h1 style={{ textAlign: "left", marginLeft: "15%", width:"100%", color: "#fff" }}>
+				CareBee
+			</h1>
+			<Button type= "submit" onClick={logout} color="danger" className="round btn-sm" style={{ marginRight: "2rem"}}>Logout</Button>
+			
 		</Nav>
 		<SidebarNav sidebar={sidebar}>
 		<SidebarWrap>

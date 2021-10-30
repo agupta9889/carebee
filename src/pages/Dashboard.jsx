@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Container, Row, Col, CardBody } from "reactstrap";
 import { Line, Pie, Doughnut} from "react-chartjs-2";
+import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
 
@@ -68,7 +69,8 @@ function Dashboard() {
 		]
 	  }
     return(
-       
+       <>
+	   <Sidebar />
         <Container>
 			<Row>
 				<Col md={2} xs={1}></Col>
@@ -132,6 +134,7 @@ function Dashboard() {
 				<Col xs={1}></Col>
 			</Row>
 		</Container>
+	</>	
        
     );
 }        

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import * as FaIcons from "react-icons/fa";
 import { Container, Row, Col, Table, Button } from "reactstrap";
+import Sidebar from "../components/Sidebar";
 //Bootstrap and jQuery libraries
 import 'jquery/dist/jquery.min.js';
 //Datatable Modules
@@ -9,6 +10,7 @@ import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'; 
 //import swal from 'sweetalert';
+import ReactTooltip from "react-tooltip";
 
 const ManageDoctor = () => {
 
@@ -73,7 +75,8 @@ const ManageDoctor = () => {
 	}	
 
 return (
-
+	<>
+		<Sidebar />
 		<Container >
 			<Row >
 				<Col md={2} xs={1}></Col>
@@ -110,9 +113,14 @@ return (
 											}
 										</td>
 										<td className="text-center">
-											<Button outline onClick={()=>hundleDoctorEdit(i)} className="edit"><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i)} className="view"><FaIcons.FaEye />
+											<Button outline onClick={()=>hundleDoctorEdit(i)} className="edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i)} className="view" data-tip data-for='viewD'><FaIcons.FaEye />
 											</Button>
-											
+											<ReactTooltip id='editD' type='warning'>
+												<span>Edit Records</span>
+											</ReactTooltip>
+											<ReactTooltip id='viewD' type='info'>
+												<span>View Records</span>
+											</ReactTooltip>
 										</td>
 									</tr>
 								 );
@@ -125,7 +133,7 @@ return (
 				<Col xs={1}></Col>
 			</Row>
 		</Container>
-
+	</>
 );
 };
 

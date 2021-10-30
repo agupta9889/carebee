@@ -1,9 +1,11 @@
 import React from "react";
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import Sidebar from "../components/Sidebar";
 
 export const EditDoctor = () => {
 return (
-
+	<>
+		<Sidebar />
 		<Container >
 			<Row >
 				<Col md={2} xs={1}></Col>
@@ -106,7 +108,7 @@ return (
 			<Col xs={1}></Col>
 			</Row>
 		</Container>
-
+	</>
 );
 };
 

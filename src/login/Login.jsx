@@ -4,6 +4,7 @@ import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
 import { Container, Row, Col, Button, FormGroup,Input } from "reactstrap";
 import "../login/Login.css";
 import axios from "axios";
+import swal from "sweetalert";
 
 
 
@@ -12,6 +13,24 @@ function Login({ setToken }){
     // Login API Integration
     const [username, setUserName ] = useState('');
     const [password, setPassword] = useState('');
+    
+    const validation = () =>{
+        
+        const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+		if(username && password && regex.test(username.toLowerCase())){
+			//console.log("hello");
+			loginUser();
+		} else{
+			//console.log("enter valid info");
+			swal({
+				title: "Warning!",
+				text: "Please fill the required field!",
+				icon: "warning",
+				dangerMode: true,
+				timer: 3000
+			});
+		}
+    }
     
     const loginUser = async () =>  {
 
@@ -31,12 +50,20 @@ function Login({ setToken }){
         };
         axios(config)
         .then(function (response) {
-          console.log(response.data.data , response.data.token );
-          setToken(response.data.token)
-          localStorage.setItem('userdata', JSON.stringify(response.data))
+            console.log(response.data.data , response.data.token );
+            setToken(response.data.token)
+            localStorage.setItem('userdata', JSON.stringify(response.data))
+            window.location.href = "/dashboard";
         })
         .catch(function (error) {
           console.log(error);
+          swal({
+            title: "Error!",
+            text: "Your Username or Password is wrong!",
+            icon: "error",
+            dangerMode: true,
+            timer: 3000
+        });
         });
         
     }
@@ -45,7 +72,6 @@ function Login({ setToken }){
        
         <Container className="login-container">  
             <Row>
-                
                 <Col sm="6" className="ads">
                     <img src={companyLogo} className="logo" alt="logo" />   
                 </Col>
@@ -64,7 +90,7 @@ function Login({ setToken }){
                             <Input type="password" onChange={e=> setPassword(e.target.value)} className="form-control" name="password" placeholder="Password" />
                         </FormGroup>
                         <FormGroup>
-                            <Button type="submit" onClick={loginUser} className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
+                            <Button type="submit" onClick={validation} className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
                         </FormGroup>
                         <FormGroup className="forget-password">
                             <a href="/forgot">Forget Password</a>
@@ -74,7 +100,7 @@ function Login({ setToken }){
                 
             </Row>
         </Container>    
-     
+       
     );
 
 }

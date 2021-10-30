@@ -7,6 +7,7 @@ import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'; 
 import axios from "axios";
+import Sidebar from "../components/Sidebar";
 
 
 function User() {
@@ -53,7 +54,8 @@ function User() {
 
 
 	return (
-	
+		<>
+			<Sidebar />
 			<Container>
 				<Row>
 					<Col md={2} xs={1}></Col>
@@ -102,7 +104,7 @@ function User() {
 					<Col xs={1}></Col>
 				</Row>
 			</Container>
-		
+		</>
 	);
 }
 

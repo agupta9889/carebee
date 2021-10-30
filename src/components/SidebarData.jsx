@@ -8,7 +8,7 @@ import * as RiIcons from "react-icons/ri";
 export const SidebarData = [
 {
 	title: "Dashboard",
-	path: "/",
+	path: "/dashboard",
 	icon: <AiIcons.AiFillHome />,
 },
 {
@@ -29,6 +29,11 @@ export const SidebarData = [
 		path: "/manage-doctor",
 		icon: <IoIcons.IoIosPaper />,
 	},
+	{
+		title: "Availability",
+		path: "#",
+		icon: <IoIcons.IoIosPaper />,
+	},
 	],
 },
 {
@@ -36,24 +41,5 @@ export const SidebarData = [
 	path: "/users",
 	icon: <FaIcons.FaUsers/>,
 },
-{
-	title: "My Account",
-	path: "#",
-	icon: <FaIcons.FaUser/>,
-	iconClosed: <RiIcons.RiArrowDownSFill />,
-	iconOpened: <RiIcons.RiArrowUpSFill />,
 
-	subNav: [
-	{
-		title: "Profile",
-		path: "#",
-		icon: <IoIcons.IoIosPerson />,
-	},
-	{
-		title: "LogOut",
-		path: "#",
-		icon: <IoIcons.IoIosLogOut />,
-	},
-	],
-},
 ];
