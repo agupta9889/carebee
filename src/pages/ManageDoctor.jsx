@@ -9,7 +9,6 @@ import 'jquery/dist/jquery.min.js';
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'; 
-//import swal from 'sweetalert';
 import ReactTooltip from "react-tooltip";
 
 const ManageDoctor = () => {
@@ -28,14 +27,6 @@ const ManageDoctor = () => {
     $(document).ready(function () {
         $('#doctorTable1').DataTable();
     });
-
-	// Sweet alert validation
-	// const notify = () => swal({
-	// 		title: "Are you sure?",
-	// 		text: "Are you sure that you want to leave this page?",
-	// 		icon: "warning",
-	// 		dangerMode: true,
-	// 	})
 
 	// API Integration
 	const [data, setstate] = useState();

@@ -8,7 +8,10 @@ import DoctorProfile from "./pages/DoctorProfile";
 import User from "./pages/Users";
 import Login from "./login/Login";
 import Dashboard from "./pages/Dashboard";
-
+import AddAvailability from "./pages/AddAvailability";
+import EditAvailability from "./pages/EditAvailability";
+import ManageAvailability from "./pages/ManageAvailability";
+import Appointments from "./pages/Appointments";
 
 function App() {
 
@@ -30,10 +33,14 @@ function App() {
 					<Route path="/" exact component={Login} />
 					<Route path="/dashboard" exact component={Dashboard} />
 					<Route path="/add-doctor" exact component={AddDoctor} />
-					<Route path="/manage-doctor" exact component={ManageDoctor} />
 					<Route path="/edit-doctor" exact component={EditDoctor} />
+					<Route path="/manage-doctor" exact component={ManageDoctor} />
 					<Route path="/doctor-profile" exact component={DoctorProfile} />
+					<Route path="/add-availability" exact component={AddAvailability} />
+					<Route path="/edit-availability" exact component={EditAvailability} />
+					<Route path="/manage-availability" exact component={ManageAvailability} />
 					<Route path="/users" exact component={User} />
+					<Route path="/appointments" exact component={Appointments} />
 				</Switch>
 			</Router>
 			

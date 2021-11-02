@@ -16,6 +16,9 @@ Body{
 input.form-control {
     font-size: 14px !important;
 }
+.form-control {
+    font-size: 14px !important;
+}
 .table-container {
     margin-top: 3% !important;
     margin-bottom: 3%;

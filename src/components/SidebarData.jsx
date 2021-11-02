@@ -29,9 +29,24 @@ export const SidebarData = [
 		path: "/manage-doctor",
 		icon: <IoIcons.IoIosPaper />,
 	},
+	],
+},
+{
+	title: "Availability",
+	path: "#",
+	icon: <FaIcons.FaClock />,
+	iconClosed: <RiIcons.RiArrowDownSFill />,
+	iconOpened: <RiIcons.RiArrowUpSFill />,
+
+	subNav: [
 	{
-		title: "Availability",
-		path: "#",
+		title: "Add Availability",
+		path: "/add-availability",
+		icon: <IoIcons.IoIosPeople />,
+	},
+	{
+		title: "Manage Availability",
+		path: "/manage-availability",
 		icon: <IoIcons.IoIosPaper />,
 	},
 	],
@@ -40,6 +55,11 @@ export const SidebarData = [
 	title: "Users",
 	path: "/users",
 	icon: <FaIcons.FaUsers/>,
+},
+{
+	title: "Appointments",
+	path: "/appointments",
+	icon: <FaIcons.FaUserClock/>,
 },
 
 ];
