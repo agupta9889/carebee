@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import * as FaIcons from "react-icons/fa";
 import { Container, Row, Col, Table, Button } from "reactstrap";
@@ -98,7 +98,7 @@ return (
 			<Row >
 				<Col md={2} xs={1}></Col>
 				<Col md={10} xs={10} className="table-container">
-				<h5>Availability</h5><hr/>
+				<h6>Availability</h6><hr/>
 					<Table id="doctorTable" responsive>
 						<thead>
 							<tr>

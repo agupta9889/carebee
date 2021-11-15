@@ -5,12 +5,12 @@ import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
 
-    // Line Chart - Booking Graph
+    // Line Chart - Appointments Graph
 	const booking = {
 		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
 		datasets: [
 		  {
-			label: 'Booking',
+			label: 'Appointments',
 			fill: false,
 			lineTension: 0.5,
 			backgroundColor: '#1672ec',
@@ -77,7 +77,7 @@ function Dashboard() {
 				<Col md={4} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
-							<span>Booking - 2021</span>
+							<span>Appointments - 2021</span>
 							<div>
 								<Line data={booking} options={{ title:{ display:true, text:'Average Rainfall per month', fontSize:20 },
 									legend:{ display:true, position:'right' } }} />
@@ -85,7 +85,7 @@ function Dashboard() {
 						</CardBody>
 					</Card>
 				</Col>
-				<Col md={3} xs={6} className="doctor-top">
+				<Col md={3} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
 							<span>Total Doctors : 15 </span>
@@ -108,7 +108,7 @@ function Dashboard() {
 						</CardBody>
 					</Card>
 				</Col>
-				<Col md={3} xs={6} className="doctor-top">
+				<Col md={3} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
 							<span>Total Users : 10 </span>

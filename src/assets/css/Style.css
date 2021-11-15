@@ -67,7 +67,7 @@ button.round.btn.btn-outline-danger{
 button.edit {
    
     color: #fff;
-    background-color: #ffc107;
+    background-color:#ffc107;
     border-color: #ffc107;
     border-radius: 0px;
 }
@@ -90,6 +90,7 @@ button.view:hover{
     border-color: #0dcaf0;
     border-radius: 0px;
 }
+
 .media{
     display: flex;
     align-items: flex-start;

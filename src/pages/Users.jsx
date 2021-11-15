@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table} from "reactstrap";
-//Bootstrap and jQuery libraries
-import 'jquery/dist/jquery.min.js';
-//Datatable Modules
-import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-dt/css/jquery.dataTables.min.css"
-import $ from 'jquery'; 
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
+import _ from "loads";
 
-
+//const pageSize = 10;
 function User() {
-
-	//initialize datatable
-	$(document).ready(function () {
-		$('#patientTable1').DataTable();
-	});
 
 	// User API Integration
 	const [data, setdata] = useState();
@@ -52,6 +42,9 @@ function User() {
 		  });
 	}
 
+	// const pageCount = data? Math.ceil(data.length/pageSize) : 0;
+	// if(pageCount === 1) return null;
+	// //const pages = _.range(1, pageCount + 1);
 
 	return (
 		<>
@@ -60,8 +53,8 @@ function User() {
 				<Row>
 					<Col md={2} xs={1}></Col>
 					<Col md={10} xs={10} className="table-container">
-						<h5>User Records</h5><hr />
-						<Table id="patientTable" responsive>
+						<h6>User Records</h6><hr />
+						<Table responsive>
 							<thead>
 								<tr>
 									<th>#</th>
@@ -91,7 +84,7 @@ function User() {
 													<td>{i.gender}</td>
 													<td>{i.age} Years</td>
 													<td>{i.height} Inch</td>
-													<td>{i.weight} Kg</td>
+													<td>{i.weigth} Kg</td>
 												</tr>
 											
 										);
@@ -100,6 +93,12 @@ function User() {
 								}
 							</tbody>
 						</Table>
+						<nav className="d-flex justify-content-center"> 
+							<ul className="pagination">
+								<li className="page-link">1</li>
+								<li className="page-link">2</li>
+							</ul>
+						</nav>
 					</Col>
 					<Col xs={1}></Col>
 				</Row>

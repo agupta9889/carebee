@@ -20,7 +20,7 @@ export const AddDoctor = () => {
 	const validation = (value) =>{
 		
 		const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-		if(first_name && last_name && mobile && mobile.length == 10&& email && regex.test(email.toLowerCase()) 
+		if(first_name && last_name && mobile && mobile.length == 10 && email && regex.test(email.toLowerCase()) 
 			&& gender && language && qualification && specialities && experience && about
 		){
 			//console.log("hello");
@@ -111,7 +111,7 @@ return (
 				<Col md={2} xs={1}></Col>
 				<Col md={10} xs={10} className="form-container">
 			{/* <Form> */}
-			<h5>Add Doctor</h5><hr/>
+			<h6>Add Doctor</h6><hr/>
 				<Row>
 					<Col md={6}>
 						<FormGroup>

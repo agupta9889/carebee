@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input} from "reactstrap";
 // import axios from "axios";
 // import swal from "sweetalert";
@@ -12,9 +12,9 @@ return (
 		<Container >
 			<Row>
 				<Col md={4} xs={1}></Col>
-				<Col md={4} xs={10} className="form-container">
+				<Col md={6} xs={10} className="form-container">
 					<Form>
-						<h5>Edit Availability</h5><hr/>
+						<h6>Edit Availability</h6><hr/>
 						<FormGroup>
 							<Label>Doctor: <span style={{fontWeight: "600" }}>Dr. AB Singh</span></Label>
 							
