@@ -7,14 +7,9 @@ import Sidebar from "../components/Sidebar";
 export const AddAvailability = () => {
 
 	const [doctorlist, setDoctorList] = useState();
-	const [name, setName] = useState();
 	useEffect(() => {
 		getDoctorList();
 	}, []);
-
-	// const docValue = (first_name, last_name) => {
-	// 	set 
-	// }
 
 	const getDoctorList = async () => {
 		
@@ -37,9 +32,8 @@ export const AddAvailability = () => {
 		.then(response => {
 		 // console.log('Response in doctor list:::', response.data.data);
 		  const filterDoctor = response.data.data.filter(doctor => doctor.type ==='DOCTOR')
-		  //console.log('fasdfasd', filterDoctor);
 		  setDoctorList(filterDoctor);
-		  setName(filterDoctor.first_name);
+		
 		})
 		.catch(function (error) {
 		  console.log(error);
@@ -112,36 +106,36 @@ export const AddAvailability = () => {
 
 			console.log(JSON.stringify(response.data));
 			//Reset Form Field
-			setDoctor('');
-			setMonday('');
-			setMonFromTime('');
-			setMonToTime('');
-			setTuesday('');
-			setTueFromTime('');
-			setTueToTime('');
-			setWednesday('');
-			setWedFromTime('');
-			setWedToTime('');
-			setThursday('');
-			setThurFromTime('');
-			setThurToTime('');
-			setFriday('');
-			setFriFromTime('');
-			setFriToTime('');
-			setSaturday('');
-			setSatFromTime('');
-			setSatToTime('');
-			setSunday('');
-			setSunFromTime('');
-			setSunToTime('');
+			setDoctor();
+			setMonday();
+			setMonFromTime();
+			setMonToTime();
+			setTuesday();
+			setTueFromTime();
+			setTueToTime();
+			setWednesday();
+			setWedFromTime();
+			setWedToTime();
+			setThursday();
+			setThurFromTime();
+			setThurToTime();
+			setFriday();
+			setFriFromTime();
+			setFriToTime();
+			setSaturday();
+			setSatFromTime();
+			setSatToTime();
+			setSunday();
+			setSunFromTime();
+			setSunToTime();
 			// Sweet alert validation
 			swal({
 				title: "Success!",
 				text: "Records have been submitted successfully!",
 				icon: "success",
-				dangerMode: true,
+				dangerMode: true
 			//	confirmButtonColor: '#1672ec',
-				timer: 3000
+				//timer: 3000
 			});
 
 		})
@@ -175,9 +169,9 @@ return (
 								{
 									doctorlist ?
 									doctorlist.map((data, index) => {
-										
+										const name  = data.first_name +' '+ data.last_name;
 										return(
-											<option value={data.id} key={index}>Dr. {data.first_name} {data.last_name}</option>
+											<option value={name} key={index}>Dr. {data.first_name} {data.last_name}</option>
 										);
 									}): null
 								}

@@ -17,7 +17,6 @@ const ManageDoctor = () => {
 		history.push("/doctor-profile/" + data);
 	}
 
-	
 
 	// API Integration
 	const [data, setState] = useState();
