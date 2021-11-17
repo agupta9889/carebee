@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import companyLogo from '../assets/images/Carebeewhite.png';
 import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
 import { Container, Row, Col, Button, FormGroup,Input } from "reactstrap";
@@ -6,14 +6,21 @@ import "../login/Login.css";
 import axios from "axios";
 import swal from "sweetalert";
 
-
-
 function Login({ setToken }){
     
     // Login API Integration
     const [username, setUserName ] = useState('');
     const [password, setPassword] = useState('');
     
+    const [session, setSession] = useState();
+	
+	useEffect(() => {
+		const data = localStorage.getItem('userdata');
+		// console.log("data in effect :::: ",JSON.parse(data));
+		setSession(JSON.parse(data))
+	});
+
+
     const validation = () =>{
         
         const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -68,40 +75,49 @@ function Login({ setToken }){
         
     }
 
-    return(
+    if (session) {
+        console.log(session);
+        window.location.href = "/dashboard";
+        
+    } else {
+      
+        return(
        
-        <Container className="login-container">  
-            <Row>
-                <Col sm="6" className="ads">
-                    <img src={companyLogo} className="logo" alt="logo" />   
-                </Col>
-                <Col sm="6" >
-                    <div className="login-form">
-                        <div className="profile-img">
-                            <img src={companyLogoIcon} className="logo-icon" alt="logo" />    
+            <Container className="login-container">  
+                <Row>
+                    <Col sm="6" className="ads">
+                        <img src={companyLogo} className="logo" alt="logo" />   
+                    </Col>
+                    <Col sm="6" >
+                        <div className="login-form">
+                            <div className="profile-img">
+                                <img src={companyLogoIcon} className="logo-icon" alt="logo" />    
+                            </div>
+                            <h3>Login</h3>
                         </div>
-                        <h3>Login</h3>
-                    </div>
-                    {/* <Form > */}
-                        <FormGroup>
-                            <Input type="text" onChange={e=> setUserName(e.target.value)} className="form-control" name="username" placeholder="Username" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Input type="password" onChange={e=> setPassword(e.target.value)} className="form-control" name="password" placeholder="Password" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Button type="submit" onClick={validation} className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
-                        </FormGroup>
-                        <FormGroup className="forget-password">
-                            <a href="/forgot">Forget Password</a>
-                        </FormGroup>
-                    {/* </Form> */}
-                </Col>  
-                
-            </Row>
-        </Container>    
-       
-    );
+                        {/* <Form > */}
+                            <FormGroup>
+                                <Input type="text" onChange={e=> setUserName(e.target.value)} className="form-control" name="username" placeholder="Username" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Input type="password" onChange={e=> setPassword(e.target.value)} className="form-control" name="password" placeholder="Password" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Button type="submit" onClick={validation} className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
+                            </FormGroup>
+                            <FormGroup className="forget-password">
+                                <a href="/forgot">Forget Password</a>
+                            </FormGroup>
+                        {/* </Form> */}
+                    </Col>  
+                    
+                </Row>
+            </Container>    
+           
+        );
+
+    }
+   
 
 }
 

@@ -93,7 +93,7 @@ export const AddAvailability = () => {
 
 		var config = {
 			method: 'post',
-			url: 'http://192.168.1.29:5000/api/availability/create',
+			url: 'http://192.168.1.29:5000/api/availability/login/create',
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2NlNThiZmY4M2M5ZmJiNWJhNDYwYiIsImlhdCI6MTYzNjQ1NDI1OSwiZXhwIjo2ODIwNDU0MjU5fQ.sFo7yCFjaOJkE_mJ_RHVsd1zqx8QbF6OhjI1UCYXz74', 
     			'Content-Type': 'application/json'

@@ -37,7 +37,7 @@ function App() {
 					<Route path="/manage-doctor" exact component={ManageDoctor} />
 					<Route path="/doctor-profile/:id" exact component={DoctorProfile} />
 					<Route path="/add-availability" exact component={AddAvailability} />
-					<Route path="/edit-availability" exact component={EditAvailability} />
+					<Route path="/edit-availability/:id" exact component={EditAvailability} />
 					<Route path="/manage-availability" exact component={ManageAvailability} />
 					<Route path="/users" exact component={User} />
 					<Route path="/appointments" exact component={Appointments} />

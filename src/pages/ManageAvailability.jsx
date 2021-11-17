@@ -7,12 +7,13 @@ import swal from "sweetalert";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
 
+
 const ManageAvailability = () => {
 
 	let history = useHistory();
 	function hundleAvailabilityEdit(data) {
-	 // console.log(data);
-     history.push("/edit-availability");
+		alert(data);
+		history.push("/edit-availability/" + data);
   	}
 
 	// API Integration for  Load data
@@ -31,7 +32,7 @@ const ManageAvailability = () => {
 			
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/availability/login/getavailability',
+		  url: 'http://192.168.1.29:5000/api/availability/login/get',
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -41,7 +42,7 @@ const ManageAvailability = () => {
 		
 		axios(config)
 		.then(response => {
-		    console.log('Response in availability data:::', response.data.data);
+		    //console.log('Response in availability data:::', response.data.data);
 			setstate(response.data.data);
 		})
 		.catch(function (error) {
@@ -82,7 +83,7 @@ const ManageAvailability = () => {
 		
 		var config = {
 			method: 'delete',
-			url: 'http://192.168.1.29:5000/api/availability/login/delete/' + id,
+			url: 'http://192.168.1.29:5000/api/availability/login/deletebyid/' + id,
 			headers: { 
 			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			  'Content-Type': 'application/json'
@@ -127,14 +128,13 @@ return (
 							{
 								data ?
 								data.map((availdata, index) => {
-									console.log('item ::: ', availdata );
-									 
-									 return(
+									//console.log('item ::: ', availdata );
+									return(
 									<tr key={index}>
 										<td>Dr. { availdata.doctor_name }</td>
 										<td>[{availdata.monday}, from:{availdata.mon_from_time} to: {availdata.mon_to_time}] - [{availdata.tuesday}, from:{availdata.tue_from_time} to: {availdata.tue_to_time}] - [{availdata.wednesday}, from:{availdata.wed_from_time} to: {availdata.wed_to_time}] - [{availdata.thursday}, from:{availdata.thur_from_time} to: {availdata.thur_to_time}] - [{availdata.friday}, from:{availdata.fri_from_time} to: {availdata.fri_to_time}] - [{availdata.saturday}, from:{availdata.sat_from_time} to: {availdata.sat_to_time}] - [{availdata.sunday}, from:{availdata.sun_from_time} to: {availdata.sun_to_time}]</td>
 										<td className="text-center" style={{width: "12%"}}>
-											<Button outline onClick={()=>hundleAvailabilityEdit(availdata)} className="edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleAvailablityDelete(availdata.id)} className="view" data-tip data-for='viewD'><FaIcons.FaTrash />
+											<Button outline onClick={()=>hundleAvailabilityEdit(availdata.id)} className="edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleAvailablityDelete(availdata.id)} className="view" data-tip data-for='viewD'><FaIcons.FaTrash />
 											</Button>
 											<ReactTooltip id='editD' type='warning'>
 												<span>Edit</span>
