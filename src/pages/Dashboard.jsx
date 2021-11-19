@@ -1,11 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Container, Row, Col, CardBody } from "reactstrap";
 import { Line, Pie, Doughnut} from "react-chartjs-2";
 import Sidebar from "../components/Sidebar";
+import axios from "axios";
 
 function Dashboard() {
 
-    // Line Chart - Appointments Graph
+	const [userdata, setUserData] = useState();
+	const [doctordata, setDoctorData] = useState();
+
+	useEffect(() => {
+		getUserDetails();
+	}, []);
+
+  const getUserDetails = async () => {
+    var data = JSON.stringify({
+      email: "p34892@gmail.com",
+      type: "USER",
+    });
+
+    var config = {
+      method: "get",
+      url: "http://192.168.1.29:5000/api/user/login/getUser",
+      headers: {
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        const filterUserData = response.data.data.filter((user) => user.type === "USER");
+		const filterDoctorData = response.data.data.filter((user) => user.type === "DOCTOR");
+		if(filterUserData){
+			setUserData(filterUserData);
+		}
+		
+		if (filterDoctorData) {
+			setDoctorData(filterDoctorData);
+		}
+		
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+	// Line Chart - Appointments Graph
 	const booking = {
 		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
 		datasets: [
@@ -16,7 +59,7 @@ function Dashboard() {
 			backgroundColor: '#1672ec',
 			borderColor: 'rgba(0,0,0,1)',
 			borderWidth: 2,
-			data: [10, 15, 20, 30, 50]
+			data: [5, 10, 15, 20, 25]
 		  }
 		]
 	  }
@@ -68,6 +111,7 @@ function Dashboard() {
 		  }
 		]
 	  }
+
     return(
        <>
 	   <Sidebar />
@@ -88,7 +132,7 @@ function Dashboard() {
 				<Col md={3} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
-							<span>Total Doctors : 15 </span>
+							<span>Total Doctors : {doctordata? doctordata.length : 0 } </span>
 							<div>
 							<Pie
 								data={doctor}
@@ -111,7 +155,7 @@ function Dashboard() {
 				<Col md={3} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
-							<span>Total Users : 10 </span>
+							<span>Total Users : {userdata? userdata.length : "-" } </span>
 							<div>
 							<Doughnut
 								data={Patient}

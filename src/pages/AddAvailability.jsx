@@ -41,7 +41,7 @@ export const AddAvailability = () => {
 
 	}
 	// Add Availability
-	const[doctor_name, setDoctor] = useState();
+	const[doctor_id, setDoctor] = useState();
 	const[monday, setMonday] = useState();
 	const[mon_from_time, setMonFromTime] = useState();
 	const[mon_to_time, setMonToTime] = useState();
@@ -67,7 +67,7 @@ export const AddAvailability = () => {
 	const doctorAvail = async () =>{
 		
 		var data = JSON.stringify({
-			"doctor_name": doctor_name,
+			"doctor_id": doctor_id,
 			"monday": monday,
 			"mon_from_time": mon_from_time,
 			"mon_to_time": mon_to_time,
@@ -164,14 +164,14 @@ return (
 						<h6>Add Availability</h6><hr/>
 						<FormGroup>
 							<Label>Doctors</Label>
-							<Input type="select" name="doctor_name" onChange={e=> setDoctor(e.target.value)} >
+							<Input type="select" name="doctor_id" onChange={e=> setDoctor(e.target.value)} >
 								<option value="default">Select Doctor</option>
 								{
 									doctorlist ?
 									doctorlist.map((data, index) => {
-										const name  = data.first_name +' '+ data.last_name;
+										
 										return(
-											<option value={name} key={index}>Dr. {data.first_name} {data.last_name}</option>
+											<option value={data.id} key={index}>Dr. {data.first_name} {data.last_name}</option>
 										);
 									}): null
 								}

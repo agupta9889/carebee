@@ -60,15 +60,25 @@ export const EditAvailability = () => {
 		  setDoctor(response.data.data.doctor_name);
 		  setMonday(response.data.data.monday);
 		  setMonFromTime(response.data.data.mon_from_time);
-		  //setEmail(response.data.data.email);
-		//   setStatus(response.data.data.status);
-		//   setGender(response.data.data.gender);
-		//   setLanguage(response.data.data.language);
-		//   setQualification(response.data.data.qualification);
-		//   setSpecialities(response.data.data.specialities);
-		//   setExperience(response.data.data.experience);
-		//   setAbout(response.data.data.about);
-		
+		  setMonToTime(response.data.data.mon_to_time);
+		  setTuesday(response.data.data.tuesday);
+		  setTueFromTime(response.data.data.tue_from_time);
+		  setTueToTime(response.data.data.tue_to_time);
+		  setWednesday(response.data.data.wednesday);
+		  setWedFromTime(response.data.data.wed_from_time);
+		  setWedToTime(response.data.data.wed_to_time);
+		  setThursday(response.data.data.thursday);
+		  setThurFromTime(response.data.data.thur_from_time);
+		  setThurToTime(response.data.data.thur_to_time);
+		  setFriday(response.data.data.friday);
+		  setFriFromTime(response.data.data.fri_from_time);
+		  setFriToTime(response.data.data.fri_to_time);
+		  setSaturday(response.data.data.saturday);
+		  setSatFromTime(response.data.data.sat_from_time);
+		  setSatToTime(response.data.data.sat_to_time);
+		  setSunday(response.data.data.sunday);
+		  setSunFromTime(response.data.data.sun_from_time);
+		  setSunToTime(response.data.data.sun_to_time);
 		})
 		.catch(function (error) {
 		  console.log(error);
@@ -81,7 +91,6 @@ export const EditAvailability = () => {
 	const doctorAvail = async () =>{
 		
 		var data = JSON.stringify({
-			"doctor_name": doctor_name,
 			"monday": monday,
 			"mon_from_time": mon_from_time,
 			"mon_to_time": mon_to_time,
@@ -106,8 +115,8 @@ export const EditAvailability = () => {
 		});
 
 		var config = {
-			method: 'post',
-			url: 'http://192.168.1.29:5000/api/availability/login/create',
+			method: 'put',
+			url: 'http://192.168.1.29:5000/api/availability/login/updatebyid/' + id,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2NlNThiZmY4M2M5ZmJiNWJhNDYwYiIsImlhdCI6MTYzNjQ1NDI1OSwiZXhwIjo2ODIwNDU0MjU5fQ.sFo7yCFjaOJkE_mJ_RHVsd1zqx8QbF6OhjI1UCYXz74', 
     			'Content-Type': 'application/json'
@@ -119,29 +128,6 @@ export const EditAvailability = () => {
 		.then(function (response) {
 
 			console.log(JSON.stringify(response.data));
-			//Reset Form Field
-			setDoctor();
-			setMonday();
-			setMonFromTime();
-			setMonToTime();
-			setTuesday();
-			setTueFromTime();
-			setTueToTime();
-			setWednesday();
-			setWedFromTime();
-			setWedToTime();
-			setThursday();
-			setThurFromTime();
-			setThurToTime();
-			setFriday();
-			setFriFromTime();
-			setFriToTime();
-			setSaturday();
-			setSatFromTime();
-			setSatToTime();
-			setSunday();
-			setSunFromTime();
-			setSunToTime();
 			// Sweet alert validation
 			swal({
 				title: "Success!",
@@ -182,7 +168,7 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setMonday(e.target.value)} name="monday" value="Mon"/>
+											<Input type="checkbox" onChange={e=> setMonday(e.target.value)} name="monday" value="Mon" checked={monday === 'Mon'}/>
 											Moday
 										</Label>
 									</FormGroup>
@@ -192,7 +178,7 @@ export const EditAvailability = () => {
 									<Input type="time"  onChange={e=> setMonFromTime(e.target.value)} name="mon_from_time" value={ moment(mon_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setMonToTime(e.target.value)} name="mon_to_time" value={ mon_to_time} defaultValue={mon_to_time}/>
+									<Input type="time" onChange={e=> setMonToTime(e.target.value)} name="mon_to_time" value={ moment(mon_to_time, ["h:mm A"]).format("HH:mm")}/>
 								</Col>
 							</Row>
 						</FormGroup>
@@ -201,16 +187,16 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setTuesday(e.target.value)} name="tuesday" value="Tue"/>
+											<Input type="checkbox" onChange={e=> setTuesday(e.target.value)} name="tuesday" value="Tue" checked={tuesday==='Tue'}/>
 											Tuesday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setTueFromTime(e.target.value)} name="tue_from_time" value={tue_from_time || ''} />
+									<Input type="time" onChange={e=> setTueFromTime(e.target.value)} name="tue_from_time" value={ moment(tue_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setTueToTime(e.target.value)} name="tue_to_time" value={tue_to_time || ''} />
+									<Input type="time" onChange={e=> setTueToTime(e.target.value)} name="tue_to_time" value={ moment(tue_to_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 							</Row>
 						</FormGroup>
@@ -219,16 +205,16 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setWednesday(e.target.value)} name="wednesday" value="Wed"/>
+											<Input type="checkbox" onChange={e=> setWednesday(e.target.value)} name="wednesday" value="Wed" checked={wednesday==='Wed'}/>
 											Wednesday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setWedFromTime(e.target.value)} name="wed_from_time" value={wed_from_time || ''}/>
+									<Input type="time" onChange={e=> setWedFromTime(e.target.value)} name="wed_from_time" value={ moment(wed_from_time, ["h:mm A"]).format("HH:mm")}/>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setWedToTime(e.target.value)} name="wed_to_time" value={wed_to_time || ''}/>
+									<Input type="time" onChange={e=> setWedToTime(e.target.value)} name="wed_to_time" value={moment (wed_to_time, ["h:mm A"]).format("HH:mm")}/>
 								</Col>
 							</Row>
 						</FormGroup>
@@ -237,16 +223,16 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setThursday(e.target.value)} name="thursday" value="Thur"/>
+											<Input type="checkbox" onChange={e=> setThursday(e.target.value)} name="thursday" value="Thur" checked={thursday==='Thur'} />
 											Thursday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setThurFromTime(e.target.value)} name="thur_from_time" value={thur_from_time || ''} />
+									<Input type="time" onChange={e=> setThurFromTime(e.target.value)} name="thur_from_time" value={moment(thur_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setThurToTime(e.target.value)} name="thur_to_time" value={thur_to_time || ''} />
+									<Input type="time" onChange={e=> setThurToTime(e.target.value)} name="thur_to_time" value={moment(thur_to_time, ["h:mm A"]).format("HH:mm") } />
 								</Col>
 							</Row>
 						</FormGroup>
@@ -255,16 +241,16 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setFriday(e.target.value)} name="friday" value="Fri"/>
+											<Input type="checkbox" onChange={e=> setFriday(e.target.value)} name="friday" value="Fri" checked={friday==='Fri'}/>
 											Friday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setFriFromTime(e.target.value)} name="fri_from_time" value={fri_from_time || ''} />
+									<Input type="time" onChange={e=> setFriFromTime(e.target.value)} name="fri_from_time" value={moment(fri_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setFriToTime(e.target.value)} name="fri_to_time" value={fri_to_time || ''} />
+									<Input type="time" onChange={e=> setFriToTime(e.target.value)} name="fri_to_time" value={moment(fri_to_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 							</Row>
 						</FormGroup>
@@ -273,16 +259,16 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setSaturday(e.target.value)} name="saturday" value="Sat"/>
+											<Input type="checkbox" onChange={e=> setSaturday(e.target.value)} name="saturday" value="Sat" checked={saturday ==='Sat'}/>
 											Saturday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setSatFromTime(e.target.value)} name="sat_from_time" value={sat_from_time || ''} />
+									<Input type="time" onChange={e=> setSatFromTime(e.target.value)} name="sat_from_time" value={moment(sat_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setSatToTime(e.target.value)} name="sat_to_time" value={sat_to_time || ''} />
+									<Input type="time" onChange={e=> setSatToTime(e.target.value)} name="sat_to_time" value={moment(sat_to_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 							</Row>
 						</FormGroup>
@@ -291,20 +277,20 @@ export const EditAvailability = () => {
 								<Col md={3}>
 									<FormGroup  check>
 										<Label check>
-											<Input type="checkbox" onChange={e=> setSunday(e.target.value)} name="sunday" value="Sun"/>
+											<Input type="checkbox" onChange={e=> setSunday(e.target.value)} name="sunday" value="Sun" checked={sunday === 'Sun'}/>
 											Sunday
 										</Label>
 									</FormGroup>
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setSunFromTime(e.target.value)} name="sun_from_time" value={sun_from_time || ''} />
+									<Input type="time" onChange={e=> setSunFromTime(e.target.value)} name="sun_from_time" value={moment(sun_from_time, ["h:mm A"]).format("HH:mm")} />
 								</Col>
 								<Col md={4}>
-									<Input type="time" onChange={e=> setSunToTime(e.target.value)} name="sun_to_time" value={sun_to_time || ''} />
+									<Input type="time" onChange={e=> setSunToTime(e.target.value)} name="sun_to_time" value={moment(sun_to_time,["h:mm A"]).format("HH:mm")} />
 								</Col>
 							</Row>
 						</FormGroup>
-						<Button type="submit" onClick={doctorAvail} >Submit</Button>
+						<Button type="submit" onClick={doctorAvail} >Update</Button>
 					{/* </Form> */}
 				</Col>
 				<Col xs={1}></Col>

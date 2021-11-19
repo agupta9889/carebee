@@ -12,7 +12,7 @@ const ManageAvailability = () => {
 
 	let history = useHistory();
 	function hundleAvailabilityEdit(data) {
-		alert(data);
+		//alert(data);
 		history.push("/edit-availability/" + data);
   	}
 
@@ -44,6 +44,7 @@ const ManageAvailability = () => {
 		.then(response => {
 		    //console.log('Response in availability data:::', response.data.data);
 			setstate(response.data.data);
+
 		})
 		.catch(function (error) {
 		  console.log(error);
