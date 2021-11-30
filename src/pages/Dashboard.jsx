@@ -32,8 +32,10 @@ function Dashboard() {
 
     axios(config)
       .then((response) => {
-        const filterUserData = response.data.data.filter((user) => user.type === "USER");
-		const filterDoctorData = response.data.data.filter((user) => user.type === "DOCTOR");
+		//console.log('Userdata', response.data.data.results);
+        const filterUserData = response.data.data.results.filter((user) => user.type === "USER");
+		const filterDoctorData = response.data.data.results.filter((user) => user.type === "DOCTOR");
+		//console.log('Userdata', filterUserData);
 		if(filterUserData){
 			setUserData(filterUserData);
 		}
@@ -132,7 +134,7 @@ function Dashboard() {
 				<Col md={3} xs={12} className="doctor-top">
 					<Card className="shadow">
 						<CardBody>
-							<span>Total Doctors : {doctordata? doctordata.length : 0 } </span>
+							<span>Total Doctors : {doctordata? doctordata.length : "-" } </span>
 							<div>
 							<Pie
 								data={doctor}

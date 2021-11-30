@@ -5,6 +5,7 @@ import { Container, Row, Col, Table, Button, Badge } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const ManageDoctor = () => {
 
@@ -20,38 +21,46 @@ const ManageDoctor = () => {
 
 	// API Integration
 	const [data, setState] = useState();
-
+	const [pageCount, setpageCount] =  useState(1);
+	const limits = 10;
+	const type = 'DOCTOR';
+	
 	useEffect(() => {
 		getDoctor();
 	}, []);
 		
-	const getDoctor = async () => {
-		
-		var data = JSON.stringify({
-		  "email": "p34892@gmail.com",
-		  "type": "USER"
-		});
-			
+	const getDoctor = async (currentPage) => {
+		if(currentPage == undefined){
+			currentPage = 1 ;
+		}
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/login/getUser',
+		  url: `http://192.168.1.29:5000/api/user/login/getUser?page=${currentPage}&limit=${limits}&type=${type}`,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
 		  },
-		  data : data
 		};
 		
 		axios(config)
 		.then(response => {
 		 // console.log('Response in doctor list:::', response.data.data);
-		  const filterDoctor = response.data.data.filter(doctor => doctor.type ==='DOCTOR')
+		  const filterDoctor = response.data.data.results;
+		  const total = response.data.total;
+			//console.log('dsfasd',total);
+			setpageCount(Math.ceil(total/limits));
 		  setState(filterDoctor);
 		})
 		.catch(function (error) {
 		  console.log(error);
 		});
 
+	}
+	const handlePageClick = async (data) =>{
+		const currentPage = data.selected + 1
+		//console.log('pageination Number', currentPage);
+		const usersFromServer = await getDoctor(currentPage);
+		setState(usersFromServer);
 	}
 	return (
 		<>
@@ -108,6 +117,25 @@ const ManageDoctor = () => {
 								}
 							</tbody>
 						</Table>
+						<ReactPaginate
+				previousLabel={'<< Pre'}
+				nextLabel={'Next >>'}
+				breakLabel={'...'}
+				pageCount={pageCount}
+				marginPagesDisplayed={2}
+				pageRangeDisplayed={3}
+				onPageChange={handlePageClick}
+				containerClassName={'pagination justify-content-center'}
+				pageClassName={'page-item'}
+				pageLinkClassName={'page-link'}
+				previousClassName={'page-item'}
+				previousLinkClassName={'page-link'}
+				nextClassName={'page-item'}
+				nextLinkClassName={'page-link'}
+				breakClassName={'page-item'}
+				breakLinkClassName={'page-link'}
+				activeClassName={'active'}
+			/>
 					</Col>
 					<Col xs={1}></Col>
 				</Row>

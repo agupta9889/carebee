@@ -7,31 +7,26 @@ import Sidebar from "../components/Sidebar";
 export const AddAvailability = () => {
 
 	const [doctorlist, setDoctorList] = useState();
+	const type= 'DOCTOR';
 	useEffect(() => {
 		getDoctorList();
 	}, []);
 
 	const getDoctorList = async () => {
 		
-		var data = JSON.stringify({
-		  "email": "p34892@gmail.com",
-		  "type": "USER"
-		});
-			
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/login/getUser',
+		  url: `http://192.168.1.29:5000/api/user/login/getUser?type=${type}`,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
 		  },
-		  data : data
 		};
 		
 		axios(config)
 		.then(response => {
 		 // console.log('Response in doctor list:::', response.data.data);
-		  const filterDoctor = response.data.data.filter(doctor => doctor.type ==='DOCTOR')
+		  const filterDoctor = response.data.data.results;
 		  setDoctorList(filterDoctor);
 		
 		})
@@ -134,8 +129,6 @@ export const AddAvailability = () => {
 				text: "Records have been submitted successfully!",
 				icon: "success",
 				dangerMode: true
-			//	confirmButtonColor: '#1672ec',
-				//timer: 3000
 			});
 
 		})

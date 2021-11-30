@@ -8,74 +8,49 @@ import ReactPaginate from "react-paginate";
 function User() {
 	
 	const [data, setdata] = useState();
-	const [pageCount, setpageCount] =  useState(0);
-	let limit = 10;
+	const [pageCount, setpageCount] =  useState(1);
+	const limits = 10;
+	const type = 'USER';
 	// User API Integration
 	useEffect(() => {
 		getUserDetails();
 	}, []);
 
-  	const getUserDetails = async () => {
-		var data = JSON.stringify();
+	const getUserDetails = async (currentPage) => {
+		if(currentPage == undefined){
+			currentPage = 1 ;
+		}
 		var config = {
 		method: "get",
-		url: 'http://192.168.1.29:5000/api/user/login/getUser?page=1&limit=5',
-		headers: {
+		url: `http://192.168.1.29:5000/api/user/login/getUser?page=${currentPage}&limit=${limits}&type=${type}`,
+	 	headers: {
 			"x-auth-token":
 			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
 			"Content-Type": "application/json",
 		},
-		data: data,
 		};
 
 		axios(config)
 		.then((response) => {
-			const filterUser = response.data.data.filter(
-			(user) => user.type === "USER"
-			);
-			//const total = response.headers.get('x-total-count');
-			//console.log('addddd', total);
+			
+			const filterUser = response.data.data.results;
+			const total = response.data.total;
+			//console.log('dsfasd',total);
+			setpageCount(Math.ceil(total/limits));
 			setdata(filterUser);
+			
 		})
 		.catch(function (error) {
 			console.log(error);
 		});
-
 	 
-  	}
-	
-	const fetchUser = async (currentPage) => {
-		
-		var data = JSON.stringify();
-	
-			var config = {
-			method: "get",
-			url: 'http://192.168.1.29:5000/api/user/login/getUser?_page=${currentPage}&_limit={limit}',
-			headers: {
-				"x-auth-token":
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
-				"Content-Type": "application/json",
-			},
-			data: data,
-			};
-	
-			axios(config)
-			.then((response) => {
-				const data = response.data.data.filter(
-				(user) => user.type === "USER"
-				);
-				//console.log('arun', data);
-				return data
+	  }
 
-			})
-	
-
-	}
+  	
 	const handlePageClick = async (data) =>{
-		
-		let currentPage = data.selected + 1
-		//console.log('arun', currentPage);
-		const usersFromServer = await fetchUser(currentPage);
+		const currentPage = data.selected + 1
+		console.log('pageination Number', currentPage);
+		const usersFromServer = await getUserDetails(currentPage);
 		setdata(usersFromServer);
 	}
 
@@ -124,11 +99,10 @@ function User() {
               </tbody>
             </Table>
             <ReactPaginate
-				previousLabel={'< previous'}
-				nextLabel={'next >'}
+				previousLabel={'<< Pre'}
+				nextLabel={'Next >>'}
 				breakLabel={'...'}
-				//pageCount={pageCount}
-				pageCount={10}
+				pageCount={pageCount}
 				marginPagesDisplayed={2}
 				pageRangeDisplayed={3}
 				onPageChange={handlePageClick}
