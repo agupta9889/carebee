@@ -13,42 +13,36 @@ function Dashboard() {
 		getUserDetails();
 	}, []);
 
-  const getUserDetails = async () => {
-    var data = JSON.stringify({
-      email: "p34892@gmail.com",
-      type: "USER",
-    });
+    const getUserDetails = async () => {
+		var config = {
+			method: "get",
+			url: "http://192.168.1.29:5000/api/user/login/getUser",
+			headers: {
+					"x-auth-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
+					"Content-Type": "application/json",
+				},
+		};
 
-    var config = {
-      method: "get",
-      url: "http://192.168.1.29:5000/api/user/login/getUser",
-      headers: {
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
-        "Content-Type": "application/json",
-      },
-      data: data,
+		axios(config)
+		.then((response) => {
+			//console.log('Userdata', response.data.data.results);
+			const filterUserData = response.data.data.results.filter((user) => user.type === "USER");
+			const filterDoctorData = response.data.data.results.filter((user) => user.type === "DOCTOR");
+			//console.log('Userdata', filterUserData);
+			if(filterUserData){
+				setUserData(filterUserData);
+			}
+			
+			if (filterDoctorData) {
+				setDoctorData(filterDoctorData);
+			}
+			
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
     };
-
-    axios(config)
-      .then((response) => {
-		//console.log('Userdata', response.data.data.results);
-        const filterUserData = response.data.data.results.filter((user) => user.type === "USER");
-		const filterDoctorData = response.data.data.results.filter((user) => user.type === "DOCTOR");
-		//console.log('Userdata', filterUserData);
-		if(filterUserData){
-			setUserData(filterUserData);
-		}
-		
-		if (filterDoctorData) {
-			setDoctorData(filterDoctorData);
-		}
-		
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
 
 	// Line Chart - Appointments Graph
 	const booking = {

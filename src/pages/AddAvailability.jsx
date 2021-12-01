@@ -15,12 +15,12 @@ export const AddAvailability = () => {
 	const getDoctorList = async () => {
 		
 		var config = {
-		  method: 'get',
-		  url: `http://192.168.1.29:5000/api/user/login/getUser?type=${type}`,
-		  headers: { 
-			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
-			'Content-Type': 'application/json'
-		  },
+			method: 'get',
+			url: `http://192.168.1.29:5000/api/user/login/get?type=${type}`,
+			headers: { 
+				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+				'Content-Type': 'application/json'
+			},
 		};
 		
 		axios(config)
@@ -145,9 +145,8 @@ export const AddAvailability = () => {
 
 	}
 	
-	
-return (
-	<>
+	return (
+		<>
 		<Sidebar />
 		<Container >
 			<Row>
@@ -302,9 +301,8 @@ return (
 				<Col xs={1}></Col>
 			</Row>
 		</Container>
-	</>
-);
+		</>
+	);
 };
-
 export default AddAvailability;
 

@@ -40,7 +40,7 @@ export const EditDoctor = () => {
 
 		var config = {
 			method: 'PUT',
-			url: 'http://192.168.1.29:5000/api/user/updateUser/' + id,
+			url: 'http://192.168.1.29:5000/api/user/updatebyid/' + id,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 				'Content-Type': 'application/json'

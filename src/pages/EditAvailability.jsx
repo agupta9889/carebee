@@ -10,7 +10,8 @@ export const EditAvailability = () => {
 
 	const {id} = useParams();
 	//alert(id);
-	const[doctor_name, setDoctor] = useState();
+	const[first_name, setFirstName] = useState();
+	const[last_name, setLastName] = useState();
 	const[monday, setMonday] = useState();
 	const[mon_from_time, setMonFromTime] = useState();
 	const[mon_to_time, setMonToTime] = useState();
@@ -57,7 +58,8 @@ export const EditAvailability = () => {
 		axios(config)
 		.then(response => {
 		  console.log('Response in availability data:::', response.data.data);
-		  setDoctor(response.data.data.doctor_name);
+		  setFirstName(response.data.data.doctor_id.first_name);
+		  setLastName(response.data.data.doctor_id.last_name);
 		  setMonday(response.data.data.monday);
 		  setMonFromTime(response.data.data.mon_from_time);
 		  setMonToTime(response.data.data.mon_to_time);
@@ -161,7 +163,7 @@ export const EditAvailability = () => {
 					{/* <Form> */}
 						<h6>Edit Availability</h6><hr/>
 						<FormGroup>
-							<Label>Doctor: <span style={{fontWeight: "600" }}>Dr. {doctor_name}</span></Label>
+							<Label>Doctor: <span style={{fontWeight: "600" }}>Dr. {first_name} {last_name}</span></Label>
 						</FormGroup>
 						<FormGroup>
 							<Row>

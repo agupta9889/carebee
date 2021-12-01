@@ -35,7 +35,7 @@ const ManageDoctor = () => {
 		}
 		var config = {
 		  method: 'get',
-		  url: `http://192.168.1.29:5000/api/user/login/getUser?page=${currentPage}&limit=${limits}&type=${type}`,
+		  url: `http://192.168.1.29:5000/api/user/login/get?page=${currentPage}&limit=${limits}&type=${type}`,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ const ManageDoctor = () => {
 										return(
 											<tr key={index}>
 												<th scope="row">{index+1}</th>
-												<td>Dr. { i.first_name } { i.last_name }</td>
+												<td>Dr. { i.first_name } {i.last_name}</td>
 												<td>{i.mobile}{i._id}</td>
 												<td>{i.email}</td>
 												<td>{i.gender}</td>
@@ -118,24 +118,24 @@ const ManageDoctor = () => {
 							</tbody>
 						</Table>
 						<ReactPaginate
-				previousLabel={'<< Pre'}
-				nextLabel={'Next >>'}
-				breakLabel={'...'}
-				pageCount={pageCount}
-				marginPagesDisplayed={2}
-				pageRangeDisplayed={3}
-				onPageChange={handlePageClick}
-				containerClassName={'pagination justify-content-center'}
-				pageClassName={'page-item'}
-				pageLinkClassName={'page-link'}
-				previousClassName={'page-item'}
-				previousLinkClassName={'page-link'}
-				nextClassName={'page-item'}
-				nextLinkClassName={'page-link'}
-				breakClassName={'page-item'}
-				breakLinkClassName={'page-link'}
-				activeClassName={'active'}
-			/>
+							previousLabel={'<< Pre'}
+							nextLabel={'Next >>'}
+							breakLabel={'...'}
+							pageCount={pageCount}
+							marginPagesDisplayed={2}
+							pageRangeDisplayed={3}
+							onPageChange={handlePageClick}
+							containerClassName={'pagination justify-content-center'}
+							pageClassName={'page-item'}
+							pageLinkClassName={'page-link'}
+							previousClassName={'page-item'}
+							previousLinkClassName={'page-link'}
+							nextClassName={'page-item'}
+							nextLinkClassName={'page-link'}
+							breakClassName={'page-item'}
+							breakLinkClassName={'page-link'}
+							activeClassName={'active'}
+						/>
 					</Col>
 					<Col xs={1}></Col>
 				</Row>

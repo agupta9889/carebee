@@ -22,7 +22,7 @@ function User() {
 		}
 		var config = {
 		method: "get",
-		url: `http://192.168.1.29:5000/api/user/login/getUser?page=${currentPage}&limit=${limits}&type=${type}`,
+		url: `http://192.168.1.29:5000/api/user/login/get?page=${currentPage}&limit=${limits}&type=${type}`,
 	 	headers: {
 			"x-auth-token":
 			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
