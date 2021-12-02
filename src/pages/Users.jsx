@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table } from "reactstrap";
+import { Container, Row, Col, Table, Badge, Button, Input, FormGroup } from "reactstrap";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router";
 
 
 function User() {
@@ -45,13 +46,36 @@ function User() {
 		});
 	 
 	  }
-
-  	
-	const handlePageClick = async (data) =>{
+ 	const handlePageClick = async (data) =>{
 		const currentPage = data.selected + 1
 		console.log('pageination Number', currentPage);
 		const usersFromServer = await getUserDetails(currentPage);
 		setdata(usersFromServer);
+	}
+
+	
+	const search = async (data) => {
+		
+		var config = {
+			method: 'get',
+			url: 'http://192.168.1.29:5000/api/user/login/search/' + data,
+			headers: { 
+			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+			  'Content-Type': 'application/json'
+			},
+		   
+		  };
+		  
+		  axios(config)
+		  .then(response => {
+			//console.log('Search Data Response :::', response.data.data);
+			const searchUser = response.data.data.filter((user) => user.type === "USER");
+			setdata(searchUser);
+			
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
 	}
 
 
@@ -62,7 +86,19 @@ function User() {
         <Row>
           <Col md={2} xs={1}></Col>
           <Col md={10} xs={10} className="table-container">
-            <h6>User Records</h6>
+		    <Row>
+				<Col md={7} xs={12} >
+					<h6>User Records</h6>
+				</Col>
+				<Col md={5} xs={12} className="d-flex justify-content-end align-items-center mb-2">
+					<Input name="search" 
+					 onChange={e=> search(e.target.value)} 
+					// onChange={e=> setSearchData(e.target.value)} 
+					
+					className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+					
+				</Col>
+			</Row>   
             <hr />
             <Table responsive>
               <thead>
@@ -72,6 +108,7 @@ function User() {
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Gender</th>
+				  <th>Anonymous</th>
                   <th>Age</th>
                   <th>Hight</th>
                   <th>Weight</th>
@@ -82,16 +119,23 @@ function User() {
                   ? data.map((item, index) => {
                       return (
                         <tr key={index}>
-                          <th scope="row">{index + 1}</th>
-                          <td>
-                            {item.first_name} {item.last_name}
-                          </td>
-                          <td>{item.mobile}</td>
-                          <td>{item.email}</td>
-                          <td>{item.gender}</td>
-                          <td>{item.age} Years</td>
-                          <td>{item.height} Inch</td>
-                          <td>{item.weigth} Kg</td>
+							<th scope="row">{index + 1}</th>
+							<td>
+								{item.first_name} {item.last_name}
+							</td>
+							<td>{item.mobile}</td>
+							<td>{item.email}</td>
+							<td>{item.gender}</td>
+							<td>{
+								// 0- Public Profile, 1- Private Profile
+									(item.anonymous === 0) 
+									?<Badge style={{backgroundColor: "red"}}>No</Badge>
+									:<Badge style={{backgroundColor: "green"}}>Yes</Badge>
+								}
+							</td>
+							<td>{item.age} Years</td>
+							<td>{item.height} Inch</td>
+							<td>{item.weigth} Kg</td>
                         </tr>
                       );
                     })

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
-import { Container, Row, Col, Media, Card, CardBody, Badge } from "reactstrap";
+import { Container, Row, Col, Media, Card, CardBody, Badge, Button } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 
 const DoctorProfile = () => {
@@ -30,11 +30,6 @@ const DoctorProfile = () => {
 
 
 	const loadDoctorProfile = async () => {
-		
-		var data = JSON.stringify({
-		  "email": "p34892@gmail.com",
-		  "type": "USER"
-		});
 			
 		var config = {
 		  method: 'get',
@@ -43,7 +38,7 @@ const DoctorProfile = () => {
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
 		  },
-		  data : data
+		 
 		};
 		
 		axios(config)
