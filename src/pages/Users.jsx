@@ -55,7 +55,8 @@ function User() {
 
 	
 	const search = async (data) => {
-		
+		if (data.length > 0) {
+
 		var config = {
 			method: 'get',
 			url: 'http://192.168.1.29:5000/api/user/login/search/' + data,
@@ -76,6 +77,9 @@ function User() {
 		  .catch(function (error) {
 			console.log(error);
 		  });
+		} else {
+			getUserDetails();
+		}
 	}
 
 
@@ -93,9 +97,7 @@ function User() {
 				<Col md={5} xs={12} className="d-flex justify-content-end align-items-center mb-2">
 					<Input name="search" 
 					 onChange={e=> search(e.target.value)} 
-					// onChange={e=> setSearchData(e.target.value)} 
-					
-					className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+					className="form-control form-control-sm ml-3 w-75 shadow" type="text" placeholder="Search" aria-label="Search" />
 					
 				</Col>
 			</Row>   
@@ -106,13 +108,11 @@ function User() {
                   <th>#</th>
                   <th>User Name</th>
                   <th>Phone</th>
-                  <th>Email</th>
+                  <th>Email Id</th>
                   <th>Gender</th>
 				  <th>Anonymous</th>
-                  <th>Age</th>
-                  <th>Hight</th>
-                  <th>Weight</th>
-                </tr>
+                  <th>Status</th>
+				</tr>
               </thead>
               <tbody>
                 {data
@@ -129,14 +129,18 @@ function User() {
 							<td>{
 								// 0- Public Profile, 1- Private Profile
 									(item.anonymous === 0) 
-									?<Badge style={{backgroundColor: "red"}}>No</Badge>
-									:<Badge style={{backgroundColor: "green"}}>Yes</Badge>
+									?<Badge className="shadow" style={{backgroundColor: "red"}}>No</Badge>
+									:<Badge className="shadow" style={{backgroundColor: "green"}}>Yes</Badge>
 								}
 							</td>
-							<td>{item.age} Years</td>
-							<td>{item.height} Inch</td>
-							<td>{item.weigth} Kg</td>
-                        </tr>
+							<td>{
+								// 0- Active, 1- Inactive
+									(item.status === 0) 
+									?<Badge className="shadow" style={{backgroundColor: "green"}}>Active</Badge>
+									:<Badge className="shadow" style={{backgroundColor: "red"}}>Inactive</Badge>
+								}
+							</td>
+						</tr>
                       );
                     })
                   : null}
@@ -151,15 +155,15 @@ function User() {
 				pageRangeDisplayed={3}
 				onPageChange={handlePageClick}
 				containerClassName={'pagination justify-content-center'}
-				pageClassName={'page-item'}
+				pageClassName={'page-item shadow'}
 				pageLinkClassName={'page-link'}
-				previousClassName={'page-item'}
-				previousLinkClassName={'page-link'}
-				nextClassName={'page-item'}
+				previousClassName={'page-item shadow'}
+				previousLinkClassName={'page-link '}
+				nextClassName={'page-item shadow'}
 				nextLinkClassName={'page-link'}
-				breakClassName={'page-item'}
+				breakClassName={'page-item shadow'}
 				breakLinkClassName={'page-link'}
-				activeClassName={'active'}
+				activeClassName={'active shadow'}
 			/>
           </Col>
           <Col xs={1}></Col>

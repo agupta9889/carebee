@@ -135,7 +135,7 @@ return (
 										<td>Dr. { availdata.doctor_id.first_name }</td>
 										<td>[{availdata.monday}, from:{availdata.mon_from_time} to: {availdata.mon_to_time}] - [{availdata.tuesday}, from:{availdata.tue_from_time} to: {availdata.tue_to_time}] - [{availdata.wednesday}, from:{availdata.wed_from_time} to: {availdata.wed_to_time}] - [{availdata.thursday}, from:{availdata.thur_from_time} to: {availdata.thur_to_time}] - [{availdata.friday}, from:{availdata.fri_from_time} to: {availdata.fri_to_time}] - [{availdata.saturday}, from:{availdata.sat_from_time} to: {availdata.sat_to_time}] - [{availdata.sunday}, from:{availdata.sun_from_time} to: {availdata.sun_to_time}]</td>
 										<td className="text-center" style={{width: "12%"}}>
-											<Button outline onClick={()=>hundleAvailabilityEdit(availdata.id)} className="edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleAvailablityDelete(availdata.id)} className="view" data-tip data-for='viewD'><FaIcons.FaTrash />
+											<Button outline onClick={()=>hundleAvailabilityEdit(availdata.id)} className="shadow edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleAvailablityDelete(availdata.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaTrash />
 											</Button>
 											<ReactTooltip id='editD' type='warning'>
 												<span>Edit</span>

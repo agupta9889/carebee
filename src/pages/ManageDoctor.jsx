@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import * as FaIcons from "react-icons/fa";
-import { Container, Row, Col, Table, Button, Badge } from "reactstrap";
+import { Container, Row, Col, Table, Button, Badge, Input } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
@@ -17,8 +17,6 @@ const ManageDoctor = () => {
   	function hundleDoctorInfo(data) {
 		history.push("/doctor-profile/" + data);
 	}
-
-
 	// API Integration
 	const [data, setState] = useState();
 	const [pageCount, setpageCount] =  useState(1);
@@ -62,6 +60,34 @@ const ManageDoctor = () => {
 		const usersFromServer = await getDoctor(currentPage);
 		setState(usersFromServer);
 	}
+
+	const search = async (data) => {
+		if (data.length > 0) {
+
+		var config = {
+			method: 'get',
+			url: 'http://192.168.1.29:5000/api/user/login/search/' + data,
+			headers: { 
+			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+			  'Content-Type': 'application/json'
+			},
+		   
+		  };
+		  
+		  axios(config)
+		  .then(response => {
+			//console.log('Search Data Response :::', response.data.data);
+			const searchUser = response.data.data.filter((user) => user.type === "DOCTOR");
+			setState(searchUser);
+			
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+		} else {
+			getDoctor();
+		}
+	}
 	return (
 		<>
 			<Sidebar />
@@ -69,7 +95,18 @@ const ManageDoctor = () => {
 				<Row >
 					<Col md={2} xs={1}></Col>
 					<Col md={10} xs={10} className="table-container">
-					<h6>Doctor Records</h6><hr/>
+					<Row>
+						<Col md={7} xs={12} >
+							<h6>Doctor Records</h6>
+						</Col>
+						<Col md={5} xs={12} className="d-flex justify-content-end align-items-center mb-2">
+							<Input name="search" 
+							onChange={e=> search(e.target.value)} 
+							className="form-control form-control-sm ml-3 w-75 shadow" type="text" placeholder="Search" aria-label="Search" />
+							
+						</Col>
+					</Row>  
+					<hr/>
 						<Table id="doctorTable" responsive>
 							<thead>
 								<tr>
@@ -96,12 +133,12 @@ const ManageDoctor = () => {
 												<td>{i.gender}</td>
 												<td>{
 														(i.status === 0)   // 0-Active, 1-Inactive
-														?<Badge style={{backgroundColor: "green"}}>Active</Badge>
-														:<Badge style={{backgroundColor: "red"}}>Inactive</Badge>
+														?<Badge className="shadow" style={{backgroundColor: "green"}}>Active</Badge>
+														:<Badge className="shadow" style={{backgroundColor: "red"}}>Inactive</Badge>
 													}
 												</td>
 												<td>
-													<Button outline onClick={()=>hundleDoctorEdit(i.id)} className="edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i.id)} className="view" data-tip data-for='viewD'><FaIcons.FaEye /></Button> 
+													<Button outline onClick={()=>hundleDoctorEdit(i.id)} className="shadow edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaEye /></Button> 
 													<ReactTooltip id='editD' type='success'>
 														<span>Edit Records</span>
 													</ReactTooltip>
@@ -117,6 +154,7 @@ const ManageDoctor = () => {
 								}
 							</tbody>
 						</Table>
+						
 						<ReactPaginate
 							previousLabel={'<< Pre'}
 							nextLabel={'Next >>'}
@@ -126,16 +164,17 @@ const ManageDoctor = () => {
 							pageRangeDisplayed={3}
 							onPageChange={handlePageClick}
 							containerClassName={'pagination justify-content-center'}
-							pageClassName={'page-item'}
+							pageClassName={'page-item shadow'}
 							pageLinkClassName={'page-link'}
-							previousClassName={'page-item'}
-							previousLinkClassName={'page-link'}
-							nextClassName={'page-item'}
+							previousClassName={'page-item shadow'}
+							previousLinkClassName={'page-link '}
+							nextClassName={'page-item shadow'}
 							nextLinkClassName={'page-link'}
-							breakClassName={'page-item'}
+							breakClassName={'page-item shadow'}
 							breakLinkClassName={'page-link'}
-							activeClassName={'active'}
+							activeClassName={'active shadow'}
 						/>
+						
 					</Col>
 					<Col xs={1}></Col>
 				</Row>

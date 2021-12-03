@@ -13,22 +13,8 @@ const DoctorProfile = () => {
 		loadDoctorProfile();
 	}, []);
 
-	const[profile, setProfile] = useState({
-		first_name: "",
-        last_name: "",
-        email: "",
-        mobile: "",
-        status: "",
-        gender: "",
-        language: "",
-        qualification: "",
-        specialities: "",
-        experience: "",
-        about: ""
-        
-	});
-
-
+	const[profile, setProfile] = useState({});
+	
 	const loadDoctorProfile = async () => {
 			
 		var config = {
@@ -45,6 +31,7 @@ const DoctorProfile = () => {
 		.then(response => {
 		  console.log('Response in doctor profile :::', response.data.data);
 		  setProfile(response.data.data);
+		 
 		  
 		})
 		.catch(function (error) {
@@ -53,8 +40,14 @@ const DoctorProfile = () => {
 
 	}	
 	
-
+	// const languageSpliter = () =>{
+	// 	let lan = ["urdu" , "hindi"];
+	// 	const arr = lan.spli(/[ ,]+/)
+	// 	console.log("array in :::::::::::: ", arr);
+	// }
+	//console.log('profiale', profile);
 return (
+	
 	<>
 		<Sidebar />
 		<Container >
@@ -94,7 +87,14 @@ return (
 								<Col md={2}>Specialities:</Col>
 								<Col md={10}>{profile.specialities}</Col>
 								<Col md={2}>Language:</Col>
-								<Col md={10}>{profile.language} </Col>
+								
+								<Col md={10}>
+									{profile.language.join(",")}
+{/* {profile && profile.language.map(function(item, index) {
+            return <span key={`demo_snap_${index}`}>{ (index ? ', ' : '') + item }</span>;
+          })} */}
+
+								</Col>
 								<Col md={2}>Bio:</Col>
 								<Col md={10}>{profile.about}</Col>
 								<Col md={2}>Status:</Col>

@@ -11,12 +11,22 @@ export const AddDoctor = () => {
 	const [mobile, setMobile] = useState();
 	const [email, setEmail] = useState();
 	const [gender, setGender] = useState('Male');
-	const [language, setLanguage] = useState('English');
+	const [language, setLanguage] = useState(['English']);
 	const [qualification, setQualification] = useState();
 	const [specialities, setSpecialities] = useState();
 	const [experience, setExperience] = useState();
 	const [about, setAbout] = useState();
+	//const [selectedFlavors, setSelectedFlavors] = useState([]);
 
+    const handleSelect = function(selectedItems) {
+        const flavors = [];
+        for (let i=0; i<selectedItems.length; i++) {
+            flavors.push(selectedItems[i].value);
+        }
+        setLanguage(flavors);
+    }
+	console.log("selected is :::::::::::",language);
+	
 	const validation = (value) =>{
 		
 		const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -168,13 +178,12 @@ return (
 					<Col md={6}>
 						<FormGroup>
 							<Label>Language</Label>
-							<Input type="select" name="language" onChange={e=> setLanguage(e.target.value)} multiple={true}>
-								<option value="English">English</option>
+							<select multiple={true} value={language} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>	<option value="English">English</option>
 								<option value="Hindi" >Hindi</option>
 								<option value="Punjabi" >Punjabi</option>
 								<option value="Urdu" >Urdu</option>
 								<option value="Gujrati" >Gujrati</option>
-							</Input>
+							</select>
 						</FormGroup>
 					</Col>
 				</Row>

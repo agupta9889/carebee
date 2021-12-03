@@ -66,7 +66,7 @@ return (
 			<h1 style={{ textAlign: "left", marginLeft: "15%", width:"100%", color: "#fff" }}>
 				CareBee
 			</h1>
-			<Button type= "submit" onClick={logout} color="danger" className="round btn-sm" style={{ marginRight: "2rem"}}>Logout</Button>
+			<Button type= "submit" onClick={logout} color="danger" className="shadow round btn-sm" style={{ marginRight: "2rem"}}>Logout</Button>
 			
 		</Nav>
 		<SidebarNav sidebar={sidebar}>
