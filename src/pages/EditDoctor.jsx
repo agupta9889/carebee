@@ -8,24 +8,35 @@ import Sidebar from "../components/Sidebar";
 export const EditDoctor = () => {
 
 	const {id} = useParams();
-	//alert(id);
 	
-	const [first_name, setFirstName] = useState();
-	const [last_name, setLastName] = useState();
+	const [firstName, setFirstName] = useState();
+	const [lastName, setLastName] = useState();
 	const [mobile, setMobile] = useState();
 	const [email, setEmail] = useState();
 	const [status, setStatus] = useState();
 	const [gender, setGender] = useState();
 	const [language, setLanguage] = useState();
 	const [qualification, setQualification] = useState();
-	const [specialities, setSpecialities] = useState();
+	const [specialties, setSpecialties] = useState();
 	const [experience, setExperience] = useState();
 	const [about, setAbout] = useState();
 
+	const handleSelect = function(selectedItems) {
+		const options = [];
+		for (let i=0; i<selectedItems.length; i++) {
+			options.push(selectedItems[i].value);
+		}
+		setLanguage(options);
+	}
+	//console.log("selected is :::::::::::",language);
+	
+
 	const updateDoctor = async () =>{
+
+		
 		var data = JSON.stringify({
-			"first_name": first_name,
-			"last_name": last_name,
+			"firstName": firstName,
+			"lastName": lastName,
 			"mobile": mobile,
 			"email": email,
 			"status": status,
@@ -33,7 +44,7 @@ export const EditDoctor = () => {
 			"type": "DOCTOR",
 			"language": language,
 			"qualification": qualification,
-			"specialities": specialities,
+			"specialties": specialties,
 			"experience": experience,
 			"about": about,
 		});
@@ -42,7 +53,7 @@ export const EditDoctor = () => {
 			method: 'PUT',
 			url: 'http://192.168.1.29:5000/api/user/updatebyid/' + id,
 			headers: { 
-				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWRmMzNkZGMyMjQ1MzBhNmM4MDMwZCIsImlhdCI6MTYzODc4OTk2MywiZXhwIjo2ODIyNzg5OTYzfQ.Gj35dbcEu_MtOhcOUMT5_uiqqlU05NRVTQ89sTyvUjA', 
 				'Content-Type': 'application/json'
 			  },
 			data : data
@@ -82,33 +93,27 @@ export const EditDoctor = () => {
 	
 	const loadDoctor = async () => {
 		
-		var data = JSON.stringify({
-		  "email": "p34892@gmail.com",
-		  "type": "USER"
-		});
-			
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/login/getbyid/' + id,
+		  url: 'http://192.168.1.29:5000/api/user/getbyid/' + id,
 		  headers: { 
-			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
+			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWRmMzNkZGMyMjQ1MzBhNmM4MDMwZCIsImlhdCI6MTYzODc4OTk2MywiZXhwIjo2ODIyNzg5OTYzfQ.Gj35dbcEu_MtOhcOUMT5_uiqqlU05NRVTQ89sTyvUjA', 
 			'Content-Type': 'application/json'
 		  },
-		  data : data
-		};
+		}
 		
 		axios(config)
 		.then(response => {
 		  //console.log('Response in doctor data:::', response.data.data);
-		  setFirstName(response.data.data.first_name);
-		  setLastName(response.data.data.last_name);
+		  setFirstName(response.data.data.firstName);
+		  setLastName(response.data.data.lastName);
 		  setMobile(response.data.data.mobile);
 		  setEmail(response.data.data.email);
 		  setStatus(response.data.data.status);
 		  setGender(response.data.data.gender);
 		  setLanguage(response.data.data.language);
 		  setQualification(response.data.data.qualification);
-		  setSpecialities(response.data.data.specialities);
+		  setSpecialties(response.data.data.specialties);
 		  setExperience(response.data.data.experience);
 		  setAbout(response.data.data.about);
 		
@@ -132,13 +137,13 @@ return (
 					<Col md={6}>
 						<FormGroup>
 							<Label>First Name</Label>
-							<Input type="text" onChange={e=> setFirstName(e.target.value)} name="first_name" value={first_name} placeholder="First Name" />
+							<Input type="text" onChange={e=> setFirstName(e.target.value)} name="firstName" value={firstName} placeholder="First Name" />
 						</FormGroup>
 					</Col>
 					<Col md={6}>
 						<FormGroup>
 							<Label>Last Name</Label>
-							<Input type="text" onChange={e=> setLastName(e.target.value)} name="last_name" value={last_name} placeholder="Last Name" />
+							<Input type="text" onChange={e=> setLastName(e.target.value)} name="lastName" value={lastName} placeholder="Last Name" />
 						</FormGroup>
 					</Col>
 				</Row>
@@ -200,7 +205,8 @@ return (
 					<Col md={4}>
 						<FormGroup>
 							<Label>Language</Label>
-							<Input type="select" name="language" onChange={e=> setLanguage(e.target.value)} multiple={true}>
+							<Input type="select" multiple={true} value={language} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>
+							{/* <Input type="select" name="language" onChange={e=> setLanguage(e.target.value)} multiple={true}> */}
 								<option value="English">English</option>
 								<option value="Hindi" >Hindi</option>
 								<option value="Punjabi" >Punjabi</option>
@@ -220,7 +226,7 @@ return (
 					<Col md={4}>
 						<FormGroup>
 							<Label>Specialities</Label>
-							<Input type="text" name="specialities" onChange={e=> setSpecialities(e.target.value)} value={specialities} placeholder="Specialities" />
+							<Input type="text" name="specialties" onChange={e=> setSpecialties(e.target.value)} value={specialties} placeholder="Specialties" />
 						</FormGroup>
 					</Col>
 					<Col md={4}>

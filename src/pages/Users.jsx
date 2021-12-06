@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table, Badge, Button, Input, FormGroup } from "reactstrap";
+import { Container, Row, Col, Table, Badge, Button, Input } from "reactstrap";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import ReactPaginate from "react-paginate";
-import { useParams } from "react-router";
 
 
 function User() {
@@ -23,7 +22,7 @@ function User() {
 		}
 		var config = {
 		method: "get",
-		url: `http://192.168.1.29:5000/api/user/login/get?page=${currentPage}&limit=${limits}&type=${type}`,
+		url: `http://192.168.1.29:5000/api/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
 	 	headers: {
 			"x-auth-token":
 			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
@@ -48,7 +47,7 @@ function User() {
 	  }
  	const handlePageClick = async (data) =>{
 		const currentPage = data.selected + 1
-		console.log('pageination Number', currentPage);
+		//console.log('pageination Number', currentPage);
 		const usersFromServer = await getUserDetails(currentPage);
 		setdata(usersFromServer);
 	}
@@ -59,7 +58,7 @@ function User() {
 
 		var config = {
 			method: 'get',
-			url: 'http://192.168.1.29:5000/api/user/login/search/' + data,
+			url: 'http://192.168.1.29:5000/api/user/search/' + data,
 			headers: { 
 			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			  'Content-Type': 'application/json'
@@ -106,7 +105,7 @@ function User() {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>User Name</th>
+                  <th>Name</th>
                   <th>Phone</th>
                   <th>Email Id</th>
                   <th>Gender</th>
@@ -121,7 +120,7 @@ function User() {
                         <tr key={index}>
 							<th scope="row">{index + 1}</th>
 							<td>
-								{item.first_name} {item.last_name}
+								{item.firstName} {item.lastName}
 							</td>
 							<td>{item.mobile}</td>
 							<td>{item.email}</td>

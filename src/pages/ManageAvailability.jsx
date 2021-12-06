@@ -25,11 +25,6 @@ const ManageAvailability = () => {
 		
 	const getAvail = async () => {
 		
-		var data = JSON.stringify({
-		  "email": "p34892@gmail.com",
-		  "type": "USER"
-		});
-			
 		var config = {
 		  method: 'get',
 		  url: 'http://192.168.1.29:5000/api/availability/login/get',
@@ -37,7 +32,6 @@ const ManageAvailability = () => {
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
 		  },
-		  data : data
 		};
 		
 		axios(config)
@@ -102,13 +96,6 @@ const ManageAvailability = () => {
 		getAvail();
 	}
 
-	// const data1 = [
-	// {
-	// 	name: "Arun Gupta",
-	// 	dates: "[Mon, from: 9:00 AM to: 3:00 PM] - [Tue, from: 9:00 AM to: 3:00 PM] - [Wed, from: 9:00 AM to: 3:00 PM] - [Thu, from: 9:00 AM to: 3:00 PM] - [Fri, from: 9:00 AM to: 3:00 PM] - [Sat, from: 9:00 AM to: 3:00 PM] - [Sun, from: 9:00 AM to: 3:00 PM]"
-	// }
-	// ]
-
 return (
 	<>
 		<Sidebar />
@@ -132,7 +119,7 @@ return (
 									//console.log('item ::: ', availdata );
 									return(
 									<tr key={index}>
-										<td>Dr. { availdata.doctor_id.first_name }</td>
+										<td>Dr. { availdata.doctor_id.firstName }</td>
 										<td>[{availdata.monday}, from:{availdata.mon_from_time} to: {availdata.mon_to_time}] - [{availdata.tuesday}, from:{availdata.tue_from_time} to: {availdata.tue_to_time}] - [{availdata.wednesday}, from:{availdata.wed_from_time} to: {availdata.wed_to_time}] - [{availdata.thursday}, from:{availdata.thur_from_time} to: {availdata.thur_to_time}] - [{availdata.friday}, from:{availdata.fri_from_time} to: {availdata.fri_to_time}] - [{availdata.saturday}, from:{availdata.sat_from_time} to: {availdata.sat_to_time}] - [{availdata.sunday}, from:{availdata.sun_from_time} to: {availdata.sun_to_time}]</td>
 										<td className="text-center" style={{width: "12%"}}>
 											<Button outline onClick={()=>hundleAvailabilityEdit(availdata.id)} className="shadow edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleAvailablityDelete(availdata.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaTrash />

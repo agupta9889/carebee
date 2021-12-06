@@ -8,6 +8,7 @@ import Sidebar from "../components/Sidebar";
 const DoctorProfile = () => {
 
 	const {id} = useParams();
+	const [lan, setLan] = useState();
 
 	useEffect(() => {
 		loadDoctorProfile();
@@ -19,7 +20,7 @@ const DoctorProfile = () => {
 			
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/login/getbyid/' + id,
+		  url: 'http://192.168.1.29:5000/api/user/getbyid/' + id,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -30,9 +31,13 @@ const DoctorProfile = () => {
 		axios(config)
 		.then(response => {
 		  console.log('Response in doctor profile :::', response.data.data);
-		  setProfile(response.data.data);
-		 
-		  
+		  if (response.data.data) {
+			setProfile(response.data.data);
+			const ln = response.data.data.language;
+			const split = ln.join(", ")
+			setLan(split);
+			//console.log("language is ::::::::::: ",split);
+		  }
 		})
 		.catch(function (error) {
 		  console.log(error);
@@ -40,12 +45,6 @@ const DoctorProfile = () => {
 
 	}	
 	
-	// const languageSpliter = () =>{
-	// 	let lan = ["urdu" , "hindi"];
-	// 	const arr = lan.spli(/[ ,]+/)
-	// 	console.log("array in :::::::::::: ", arr);
-	// }
-	//console.log('profiale', profile);
 return (
 	
 	<>
@@ -61,7 +60,7 @@ return (
 									<img src={companyLogoIcon} alt="users view avatar" className="users-avatar-shadow rounded-circle" height="64" width="64"/>
 								</a>
 								<Media body className="pt-25">
-									<Media heading>Dr. {profile.first_name} {profile.last_name}</Media>
+									<Media heading>Dr. {profile.firstName} {profile.lastName}</Media>
 									<span>Qualification : {profile.qualification}</span>
 								</Media>
 							</Media>
@@ -85,14 +84,11 @@ return (
 								<Col md={2}>Qualification:</Col>
 								<Col md={10}>{profile.qualification}</Col>
 								<Col md={2}>Specialities:</Col>
-								<Col md={10}>{profile.specialities}</Col>
+								<Col md={10}>{profile.specialties}</Col>
 								<Col md={2}>Language:</Col>
 								
 								<Col md={10}>
-									{profile.language.join(",")}
-{/* {profile && profile.language.map(function(item, index) {
-            return <span key={`demo_snap_${index}`}>{ (index ? ', ' : '') + item }</span>;
-          })} */}
+									{lan ? lan : "English" }	
 
 								</Col>
 								<Col md={2}>Bio:</Col>

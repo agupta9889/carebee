@@ -19,13 +19,13 @@ export const AddDoctor = () => {
 	//const [selectedFlavors, setSelectedFlavors] = useState([]);
 
     const handleSelect = function(selectedItems) {
-        const flavors = [];
+        const options = [];
         for (let i=0; i<selectedItems.length; i++) {
-            flavors.push(selectedItems[i].value);
+            options.push(selectedItems[i].value);
         }
-        setLanguage(flavors);
+        setLanguage(options);
     }
-	console.log("selected is :::::::::::",language);
+	//console.log("selected is :::::::::::",language);
 	
 	const validation = (value) =>{
 		
@@ -52,15 +52,15 @@ export const AddDoctor = () => {
 	const addUser = async () =>{
 		
 		var data = JSON.stringify({
-			"first_name": first_name,
-			"last_name": last_name,
+			"firstName": first_name,
+			"lastName": last_name,
 			"mobile": mobile,
 			"email": email,
 			"gender": gender,
 			"type": "DOCTOR",
 			"language": language,
 			"qualification": qualification,
-			"specialities": specialities,
+			"specialties": specialities,
 			"experience": experience,
 			"about": about,
 		});
@@ -178,12 +178,13 @@ return (
 					<Col md={6}>
 						<FormGroup>
 							<Label>Language</Label>
-							<select multiple={true} value={language} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>	<option value="English">English</option>
+							<Input type="select" multiple={true} value={language} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>	
+								<option value="English">English</option>
 								<option value="Hindi" >Hindi</option>
 								<option value="Punjabi" >Punjabi</option>
 								<option value="Urdu" >Urdu</option>
 								<option value="Gujrati" >Gujrati</option>
-							</select>
+							</Input>
 						</FormGroup>
 					</Col>
 				</Row>

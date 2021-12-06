@@ -16,7 +16,7 @@ export const AddAvailability = () => {
 		
 		var config = {
 			method: 'get',
-			url: `http://192.168.1.29:5000/api/user/login/get?type=${type}`,
+			url: `http://192.168.1.29:5000/api/user/get?type=${type}`,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 				'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ export const AddAvailability = () => {
 									doctorlist.map((data, index) => {
 										
 										return(
-											<option value={data.id} key={index}>Dr. {data.first_name} {data.last_name}</option>
+											<option value={data.id} key={index}>Dr. {data.firstName} {data.lastName}</option>
 										);
 									}): null
 								}

@@ -33,7 +33,7 @@ const ManageDoctor = () => {
 		}
 		var config = {
 		  method: 'get',
-		  url: `http://192.168.1.29:5000/api/user/login/get?page=${currentPage}&limit=${limits}&type=${type}`,
+		  url: `http://192.168.1.29:5000/api/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ const ManageDoctor = () => {
 
 		var config = {
 			method: 'get',
-			url: 'http://192.168.1.29:5000/api/user/login/search/' + data,
+			url: 'http://192.168.1.29:5000/api/user/search/' + data,
 			headers: { 
 			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			  'Content-Type': 'application/json'
@@ -122,23 +122,23 @@ const ManageDoctor = () => {
 							<tbody>
 								{
 									data ?
-									data.map((i, index) => {
+									data.map((item, index) => {
 										//console.log('item ::: ');
 										return(
 											<tr key={index}>
 												<th scope="row">{index+1}</th>
-												<td>Dr. { i.first_name } {i.last_name}</td>
-												<td>{i.mobile}{i._id}</td>
-												<td>{i.email}</td>
-												<td>{i.gender}</td>
+												<td>Dr. { item.firstName } {item.lastName}</td>
+												<td>{item.mobile}{item._id}</td>
+												<td>{item.email}</td>
+												<td>{item.gender}</td>
 												<td>{
-														(i.status === 0)   // 0-Active, 1-Inactive
+														(item.status === 0)   // 0-Active, 1-Inactive
 														?<Badge className="shadow" style={{backgroundColor: "green"}}>Active</Badge>
 														:<Badge className="shadow" style={{backgroundColor: "red"}}>Inactive</Badge>
 													}
 												</td>
 												<td>
-													<Button outline onClick={()=>hundleDoctorEdit(i.id)} className="shadow edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(i.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaEye /></Button> 
+													<Button outline onClick={()=>hundleDoctorEdit(item.id)} className="shadow edit" data-tip data-for='editD'><FaIcons.FaPencilAlt /></Button> <Button outline onClick={()=>hundleDoctorInfo(item.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaEye /></Button> 
 													<ReactTooltip id='editD' type='success'>
 														<span>Edit Records</span>
 													</ReactTooltip>
