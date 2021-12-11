@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, FormGroup,Input } from "reactstrap";
 import "../login/Login.css";
 import axios from "axios";
 import swal from "sweetalert";
+import GLOBALS from '../constants/global';
 
 function Login({ setToken }){
     
@@ -49,13 +50,14 @@ function Login({ setToken }){
         
         var config = {
           method: 'post',
-          url: 'http://192.168.1.29:5000/api/user/login',
+          url: `${GLOBALS.BASE_URL}/user/login`,
           headers: { 
             'Content-Type': 'application/json'
           },
           data : data
         };
-        axios(config)
+        console.log('arung data', config)
+        await axios(config)
         .then(function (response) {
             console.log(response.data.data , response.data.token );
             setToken(response.data.token)

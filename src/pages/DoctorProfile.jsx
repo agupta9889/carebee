@@ -4,9 +4,10 @@ import axios from "axios";
 import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
 import { Container, Row, Col, Media, Card, CardBody, Badge, Button } from "reactstrap";
 import Sidebar from "../components/Sidebar";
+import GLOBALS from '../constants/global';
 
 const DoctorProfile = () => {
-
+	
 	const {id} = useParams();
 	const [lan, setLan] = useState();
 
@@ -20,7 +21,7 @@ const DoctorProfile = () => {
 			
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/getbyid/' + id,
+		  url: `${GLOBALS.BASE_URL}/user/getbyid/` + id,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -57,7 +58,7 @@ return (
 						<Col md={7} xs={12} >
 							<Media className="mb-2">
 								<a href="/" className="mr-1">
-									<img src={companyLogoIcon} alt="users view avatar" className="users-avatar-shadow rounded-circle" height="64" width="64"/>
+									<img src={'http://192.168.137.1:5000/'+ profile.profileImage} alt="users view avatar" className="users-avatar-shadow rounded-circle" height="64" width="64"/>
 								</a>
 								<Media body className="pt-25">
 									<Media heading>Dr. {profile.firstName} {profile.lastName}</Media>

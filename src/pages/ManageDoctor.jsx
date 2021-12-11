@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import GLOBALS from '../constants/global';
 
 const ManageDoctor = () => {
 
@@ -33,7 +34,7 @@ const ManageDoctor = () => {
 		}
 		var config = {
 		  method: 'get',
-		  url: `http://192.168.1.29:5000/api/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
+		  url: `${GLOBALS.BASE_URL}/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			'Content-Type': 'application/json'
@@ -66,7 +67,7 @@ const ManageDoctor = () => {
 
 		var config = {
 			method: 'get',
-			url: 'http://192.168.1.29:5000/api/user/search/' + data,
+			url: `${GLOBALS.BASE_URL}/user/search/` + data,
 			headers: { 
 			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 			  'Content-Type': 'application/json'

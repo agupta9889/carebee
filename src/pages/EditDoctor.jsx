@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, FormGroup, Label, Input} from "reactstrap"
 import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
+import GLOBALS from '../constants/global';
 
 export const EditDoctor = () => {
 
@@ -51,7 +52,7 @@ export const EditDoctor = () => {
 
 		var config = {
 			method: 'PUT',
-			url: 'http://192.168.1.29:5000/api/user/updatebyid/' + id,
+			url: `${GLOBALS.BASE_URL}/user/updatebyid/` + id,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWRmMzNkZGMyMjQ1MzBhNmM4MDMwZCIsImlhdCI6MTYzODc4OTk2MywiZXhwIjo2ODIyNzg5OTYzfQ.Gj35dbcEu_MtOhcOUMT5_uiqqlU05NRVTQ89sTyvUjA', 
 				'Content-Type': 'application/json'
@@ -95,7 +96,7 @@ export const EditDoctor = () => {
 		
 		var config = {
 		  method: 'get',
-		  url: 'http://192.168.1.29:5000/api/user/getbyid/' + id,
+		  url: `${GLOBALS.BASE_URL}/user/getbyid/` + id,
 		  headers: { 
 			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWRmMzNkZGMyMjQ1MzBhNmM4MDMwZCIsImlhdCI6MTYzODc4OTk2MywiZXhwIjo2ODIyNzg5OTYzfQ.Gj35dbcEu_MtOhcOUMT5_uiqqlU05NRVTQ89sTyvUjA', 
 			'Content-Type': 'application/json'

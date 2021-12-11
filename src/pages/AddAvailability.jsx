@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Form, FormGroup, Label, Input} from "react
 import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
+import GLOBALS from '../constants/global';
 
 export const AddAvailability = () => {
 
@@ -16,7 +17,7 @@ export const AddAvailability = () => {
 		
 		var config = {
 			method: 'get',
-			url: `http://192.168.1.29:5000/api/user/get?type=${type}`,
+			url: `${GLOBALS.BASE_URL}/user/get?type=${type}`,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
 				'Content-Type': 'application/json'
@@ -88,7 +89,7 @@ export const AddAvailability = () => {
 
 		var config = {
 			method: 'post',
-			url: 'http://192.168.1.29:5000/api/availability/login/create',
+			url: `${GLOBALS.BASE_URL}/availability/login/create`,
 			headers: { 
 				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2NlNThiZmY4M2M5ZmJiNWJhNDYwYiIsImlhdCI6MTYzNjQ1NDI1OSwiZXhwIjo2ODIwNDU0MjU5fQ.sFo7yCFjaOJkE_mJ_RHVsd1zqx8QbF6OhjI1UCYXz74', 
     			'Content-Type': 'application/json'

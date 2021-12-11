@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, FormGroup, Label, Input} from "reactstrap"
 import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
+import GLOBALS from '../constants/global';
 
 export const AddDoctor = () => {
 
@@ -16,7 +17,6 @@ export const AddDoctor = () => {
 	const [specialities, setSpecialities] = useState();
 	const [experience, setExperience] = useState();
 	const [about, setAbout] = useState();
-	//const [selectedFlavors, setSelectedFlavors] = useState([]);
 
     const handleSelect = function(selectedItems) {
         const options = [];
@@ -67,7 +67,7 @@ export const AddDoctor = () => {
 
 		var config = {
 			method: 'post',
-			url: 'http://192.168.1.29:5000/api/user/create',
+			url: `${GLOBALS.BASE_URL}/user/create`,
 			headers: { 
 				'Content-Type': 'application/json'
 			},
@@ -212,6 +212,7 @@ return (
 					<Label>Bio-About</Label>
 					<Input type="textarea" name="about" onChange={e=> setAbout(e.target.value)} value={about || ''} />
 				</FormGroup>
+				
 				<Button type="submit" onClick={validation} >Submit</Button>
 			{/* </Form> */}
 			</Col>
