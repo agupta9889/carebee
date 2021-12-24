@@ -61,5 +61,10 @@ export const SidebarData = [
 	path: "/appointments",
 	icon: <FaIcons.FaUserClock/>,
 },
+{
+	title: "Mood Tracker",
+	path: "/mood-tracker",
+	icon: <FaIcons.FaUserShield/>,
+},
 
 ];

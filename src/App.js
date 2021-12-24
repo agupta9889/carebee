@@ -12,6 +12,7 @@ import AddAvailability from "./pages/AddAvailability";
 import EditAvailability from "./pages/EditAvailability";
 import ManageAvailability from "./pages/ManageAvailability";
 import Appointments from "./pages/Appointments";
+import MoodTracker from "./pages/MoodTracker"
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
 					<Route path="/manage-availability" exact component={ManageAvailability} />
 					<Route path="/users" exact component={User} />
 					<Route path="/appointments" exact component={Appointments} />
+					<Route path="/mood-tracker" exact component={MoodTracker} />
 				</Switch>
 			</Router>
 			

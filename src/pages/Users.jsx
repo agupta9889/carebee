@@ -112,6 +112,7 @@ function User() {
                   <th>Gender</th>
 				  <th>Anonymous</th>
                   <th>Status</th>
+				  <th>View</th>
 				</tr>
               </thead>
               <tbody>
@@ -139,6 +140,9 @@ function User() {
 									?<Badge className="shadow" style={{backgroundColor: "green"}}>Active</Badge>
 									:<Badge className="shadow" style={{backgroundColor: "red"}}>Inactive</Badge>
 								}
+							</td>
+							<td>
+								
 							</td>
 						</tr>
                       );

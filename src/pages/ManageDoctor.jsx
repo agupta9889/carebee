@@ -43,12 +43,12 @@ const ManageDoctor = () => {
 		
 		axios(config)
 		.then(response => {
-		 // console.log('Response in doctor list:::', response.data.data);
-		  const filterDoctor = response.data.data.results;
-		  const total = response.data.total;
+		 	// console.log('Response in doctor list:::', response.data.data);
+		  	const filterDoctor = response.data.data.results;
+		  	const total = response.data.total;
 			//console.log('dsfasd',total);
 			setpageCount(Math.ceil(total/limits));
-		  setState(filterDoctor);
+		  	setState(filterDoctor);
 		})
 		.catch(function (error) {
 		  console.log(error);
@@ -61,7 +61,7 @@ const ManageDoctor = () => {
 		const usersFromServer = await getDoctor(currentPage);
 		setState(usersFromServer);
 	}
-
+	// Search API
 	const search = async (data) => {
 		if (data.length > 0) {
 
