@@ -115,6 +115,9 @@ button.view:hover{
     margin-right: 0.25rem!important;
 }
 .doctor-top {
-    margin-top: 5% !important;
+    margin-top: 2% !important;
     font-size: 14px;
+}
+.doctor-bottom {
+    margin-top: 2%;
 }

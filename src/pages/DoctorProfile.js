@@ -78,11 +78,10 @@ const DoctorProfile = () => {
 	
    
 	const imageSubmit = (event) => {
-	
 		event.preventDefault();
 		let data1 = new FormData();
 		data1.append('file', uploadImage);
-    const imgData = data1.get('file');
+    	const imgData = data1.get('file');
 		console.log('RAJEEV DWIVEDI', imgData)
 
 	  var config = {
@@ -176,10 +175,8 @@ return (
 								<Col md={2}>Specialities:</Col>
 								<Col md={10}>{profile.specialties}</Col>
 								<Col md={2}>Language:</Col>
-								
 								<Col md={10}>
 									{lan ? lan : "English" }	
-
 								</Col>
 								<Col md={2}>Bio:</Col>
 								<Col md={10}>{profile.about}</Col>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table, Badge, Button, Input } from "reactstrap";
 import axios from "axios";
+import * as FaIcons from "react-icons/fa";
+import ReactTooltip from "react-tooltip";
 import Sidebar from "../components/Sidebar";
 import ReactPaginate from "react-paginate";
 import GLOBALS from '../constants/global';
+import { useHistory } from "react-router-dom";
 
 
 function User() {
@@ -16,6 +19,12 @@ function User() {
 	useEffect(() => {
 		getUserDetails();
 	}, []);
+	let history = useHistory();
+
+	function hundleMoodTracker(data){
+		// alert(data);
+		history.push("/mood-tracker/" +data);
+	}
 
 	const getUserDetails = async (currentPage) => {
 		if(currentPage == undefined){
@@ -116,9 +125,9 @@ function User() {
 				</tr>
               </thead>
               <tbody>
-                {data
-                  ? data.map((item, index) => {
-                      return (
+                { data
+                	? data.map((item, index) => {
+                    	return (
                         <tr key={index}>
 							<th scope="row">{index + 1}</th>
 							<td>
@@ -127,25 +136,29 @@ function User() {
 							<td>{item.mobile}</td>
 							<td>{item.email}</td>
 							<td>{item.gender}</td>
-							<td>{
-								// 0- Public Profile, 1- Private Profile
-									(item.anonymous === 0) 
-									?<Badge className="shadow" style={{backgroundColor: "red"}}>No</Badge>
-									:<Badge className="shadow" style={{backgroundColor: "green"}}>Yes</Badge>
-								}
-							</td>
-							<td>{
-								// 0- Active, 1- Inactive
-									(item.status === 0) 
-									?<Badge className="shadow" style={{backgroundColor: "green"}}>Active</Badge>
-									:<Badge className="shadow" style={{backgroundColor: "red"}}>Inactive</Badge>
-								}
+							<td>
+								{/* 0- Public Profile, 1- Private Profile */}
+								<Badge className="shadow" style={{backgroundColor: item.anonymous === 1 ? "green" : "red"}}>
+								{
+									item.anonymous === 1 ? 'Yes' : 'No'
+								} </Badge>
 							</td>
 							<td>
-								
+								{/* 0- Active, 1-Inactive */}
+								<Badge className="shadow" style={{backgroundColor: item.status === 0 ? "green" : "red"}}>
+								{
+									item.status === 0 ? 'Active' : 'Inactive'
+								}
+								</Badge>
+							</td>
+							<td>
+							<Button outline onClick={()=>hundleMoodTracker(item.id)} className="shadow view" data-tip data-for='viewD'><FaIcons.FaEye /></Button> 
+							<ReactTooltip id='viewD' type='info'>
+								<span>Mood Tracker</span>
+							</ReactTooltip>
 							</td>
 						</tr>
-                      );
+                    	);
                     })
                   : null}
               </tbody>

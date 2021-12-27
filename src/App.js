@@ -42,7 +42,7 @@ function App() {
 					<Route path="/manage-availability" exact component={ManageAvailability} />
 					<Route path="/users" exact component={User} />
 					<Route path="/appointments" exact component={Appointments} />
-					<Route path="/mood-tracker" exact component={MoodTracker} />
+					<Route path="/mood-tracker/:id" exact component={MoodTracker} />
 				</Switch>
 			</Router>
 			
