@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import companyLogo from '../assets/images/Carebeewhite.png';
 import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
-import { Container, Row, Col, Button, FormGroup,Input } from "reactstrap";
+import { Container, Row, Col, Button, FormGroup,Input, Form } from "reactstrap";
 import "../login/Login.css";
 import axios from "axios";
 import swal from "sweetalert";
@@ -22,8 +22,8 @@ function Login({ setToken }){
 	});
 
 
-    const validation = () =>{
-        
+    const validation = (evt) =>{
+        evt.preventDefault();
         const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 		if(username && password && regex.test(username.toLowerCase())){
 			//console.log("hello");
@@ -41,7 +41,7 @@ function Login({ setToken }){
     }
     
     const loginUser = async () =>  {
-
+       
         var data = JSON.stringify({
           "email": username,
           "type": "ADMIN",
@@ -56,7 +56,7 @@ function Login({ setToken }){
           },
           data : data
         };
-        console.log('arung data', config)
+        //console.log('arung data', config)
         await axios(config)
         .then(function (response) {
             console.log(response.data.data , response.data.token );
@@ -97,7 +97,7 @@ function Login({ setToken }){
                             </div>
                             <h3>Login</h3>
                         </div>
-                        {/* <Form > */}
+                        <Form onSubmit={validation}>
                             <FormGroup>
                                 <Input type="text" onChange={e=> setUserName(e.target.value)} className="form-control" name="username" placeholder="Username" />
                             </FormGroup>
@@ -105,12 +105,12 @@ function Login({ setToken }){
                                 <Input type="password" onChange={e=> setPassword(e.target.value)} className="form-control" name="password" placeholder="Password" />
                             </FormGroup>
                             <FormGroup>
-                                <Button type="submit" onClick={validation} className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
+                                <Button type="submit" className="login-button btn btn-primary btn-lg btn-block">Sign In</Button>
                             </FormGroup>
                             <FormGroup className="forget-password">
                                 <a href="/forgot">Forget Password</a>
                             </FormGroup>
-                        {/* </Form> */}
+                        </Form>
                     </Col>  
                     
                 </Row>

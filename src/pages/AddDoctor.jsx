@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Container, Row, Col, Button, FormGroup, Label, Input} from "reactstrap";
+import { Container, Row, Col, Button, FormGroup, Label, Input, Form} from "reactstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
@@ -28,7 +28,7 @@ export const AddDoctor = () => {
 	//console.log("selected is :::::::::::",language);
 	
 	const validation = (value) =>{
-		
+		value.preventDefault();
 		const regex =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 		if(first_name && last_name && mobile && mobile.length == 10 && email && regex.test(email.toLowerCase()) 
 			&& gender && language && qualification && specialities && experience && about
@@ -120,7 +120,7 @@ return (
 			<Row >
 				<Col md={2} xs={1}></Col>
 				<Col md={10} xs={10} className="form-container">
-			{/* <Form> */}
+			<Form onSubmit={validation}>
 			<h6>Add Doctor</h6><hr/>
 				<Row>
 					<Col md={6}>
@@ -213,8 +213,8 @@ return (
 					<Input type="textarea" name="about" onChange={e=> setAbout(e.target.value)} value={about || ''} />
 				</FormGroup>
 				
-				<Button type="submit" onClick={validation} >Submit</Button>
-			{/* </Form> */}
+				<Button type="submit" >Submit</Button>
+			</Form>
 			</Col>
 			<Col xs={1}></Col>
 			</Row>

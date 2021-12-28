@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useParams  } from "react-router";
-import { Container, Row, Col, Button, FormGroup, Label, Input} from "reactstrap";
+import { Container, Row, Col, Button, FormGroup, Label, Input, Form} from "reactstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
@@ -32,9 +32,8 @@ export const EditDoctor = () => {
 	//console.log("selected is :::::::::::",language);
 	
 
-	const updateDoctor = async () =>{
-
-		
+	const updateDoctor = async (evt) =>{
+		evt.preventDefault();
 		var data = JSON.stringify({
 			"firstName": firstName,
 			"lastName": lastName,
@@ -132,7 +131,7 @@ return (
 			<Row >
 				<Col md={2} xs={1}></Col>
 				<Col md={10} xs={10} className="form-container">
-			{/* <Form> */}
+			<Form onSubmit={updateDoctor}>
 			<h6>Edit Doctor</h6><hr/>
 				<Row>
 					<Col md={6}>
@@ -241,8 +240,8 @@ return (
 					<Label>Bio-About</Label>
 					<Input type="textarea" name="about" onChange={e=> setAbout(e.target.value)} value={about} />
 				</FormGroup>
-				<Button type="submit" onClick={updateDoctor} >Update</Button>
-			{/* </Form> */}
+				<Button type="submit" >Update</Button>
+			</Form>
 			</Col>
 			<Col xs={1}></Col>
 			</Row>
