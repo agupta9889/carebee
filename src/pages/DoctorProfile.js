@@ -6,11 +6,12 @@ import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
 import { Container, Row, Col, Media, Card, CardBody, Badge, Input, Button, Form, FormGroup, Label } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import GLOBALS from '../constants/global';
+import doctorServices from "../services/doctor"
 
 const DoctorProfile = () => {
 	
 	const [uploadImage, setUploadImages] = React.useState();
-
+	const [profileData, setProfileData] = useState({});
 	const BaseURL = "http://192.168.137.1:5000/"
 	const {id} = useParams();
 	const [lan, setLan] = useState();
@@ -19,25 +20,15 @@ const DoctorProfile = () => {
 		loadDoctorProfile();
 	}, []);
 
-	const[profile, setProfile] = useState({});
+	
 	
 	const loadDoctorProfile = async () => {
-			
-		var config = {
-		  method: 'get',
-		  url: `${GLOBALS.BASE_URL}/user/getbyid/` + id,
-		  headers: { 
-			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
-			'Content-Type': 'application/json'
-		  },
-		 
-		};
 		
-		axios(config)
+		doctorServices.profile(id)
 		.then(response => {
-		  console.log('Response in doctor profile :::', response.data.data);
+		  //console.log('Response in doctor profile :::', response.data.data);
 		  if (response.data.data) {
-			setProfile(response.data.data);
+			setProfileData(response.data.data);
 			const ln = response.data.data.language;
 			const split = ln.join(", ")
 			setLan(split);
@@ -81,14 +72,14 @@ const DoctorProfile = () => {
 		event.preventDefault();
 		let data1 = new FormData();
 		data1.append('file', uploadImage);
-    	const imgData = data1.get('file');
+		const imgData = data1.get('file');
 		console.log('RAJEEV DWIVEDI', imgData)
 
-	  var config = {
-      method: 'put',
-      url: `${GLOBALS.BASE_URL}/user/uploadprofilebyid/` + id,
-      data: imgData.file,
-      headers: {
+		var config = {
+		method: 'put',
+		url: `${GLOBALS.BASE_URL}/user/uploadprofilebyid/` + id,
+		data: imgData.file,
+		headers: {
         "Content-Type": "multipart/form-data; boundary=MyBoundary",
         'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo' 		  
         },
@@ -130,17 +121,17 @@ return (
 								<div className="rounded-circle mr-1" 
 									style={{ border: "1px dashed black" }} onClick={() => imageUploader.current.click()}>
 									{
-										(!profile.profileImage)
+										(!profileData.profileImage)
 										? <img src={companyLogoIcon} ref={uploadedImage}className="users-avatar-shadow rounded-circle" style={{position: "acsolute", width: "64px", height: "64px" }}
 										/>
-										: <img src={BaseURL+profile.profileImage} ref={uploadedImage} className="users-avatar-shadow rounded-circle" style={{position: "acsolute", width: "64px", height: "64px" }} />
+										: <img src={BaseURL+profileData.profileImage} ref={uploadedImage} className="users-avatar-shadow rounded-circle" style={{position: "acsolute", width: "64px", height: "64px" }} />
 									}
 									
 								</div>
 								
 								<Media body className="pt-25">
-									<Media heading>Dr. {profile.firstName} {profile.lastName}</Media>
-									<span>Qualification : {profile.qualification}</span>
+									<Media heading>Dr. {profileData.firstName} {profileData.lastName}</Media>
+									<span>Qualification : {profileData.qualification}</span>
 								</Media>
 							</Media>
 						</Col>
@@ -162,28 +153,28 @@ return (
 						<CardBody>
 							<Row className="bg-lighten-5 rounded mb-2 mx-25">
 								<Col md={4} sm={12} className="p-2">
-									<span><b>Mobile:</b> {profile.mobile}</span>
+									<span><b>Mobile:</b> {profileData.mobile}</span>
 								</Col>
-								<Col md={4} sm={12} className="p-2"><b>Email:</b> {profile.email}</Col>
-								<Col md={4} sm={12} className="p-2"><b>Experience:</b> {profile.experience} Years</Col>
+								<Col md={4} sm={12} className="p-2"><b>Email:</b> {profileData.email}</Col>
+								<Col md={4} sm={12} className="p-2"><b>Experience:</b> {profileData.experience} Years</Col>
 							</Row>
 							<Row className="doctor-top mb-2 mx-25">
 								<Col md={2}>Gender:</Col>
-								<Col md={10}>{profile.gender}</Col>
+								<Col md={10}>{profileData.gender}</Col>
 								<Col md={2}>Qualification:</Col>
-								<Col md={10}>{profile.qualification}</Col>
+								<Col md={10}>{profileData.qualification}</Col>
 								<Col md={2}>Specialities:</Col>
-								<Col md={10}>{profile.specialties}</Col>
+								<Col md={10}>{profileData.specialties}</Col>
 								<Col md={2}>Language:</Col>
 								<Col md={10}>
 									{lan ? lan : "English" }	
 								</Col>
 								<Col md={2}>Bio:</Col>
-								<Col md={10}>{profile.about}</Col>
+								<Col md={10}>{profileData.about}</Col>
 								<Col md={2}>Status:</Col>
 								<Col md={10}>
 									{
-										(profile.status === 0)  // 0-Active, 1-Inactive
+										(profileData.status === 0)  // 0-Active, 1-Inactive
 										?<Badge style={{backgroundColor: "green"}}>Active</Badge>
 										:<Badge style={{backgroundColor: "red"}}>Inactive</Badge>
 									}	

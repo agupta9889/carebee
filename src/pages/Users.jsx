@@ -13,7 +13,7 @@ function User() {
 	
 	const [data, setdata] = useState();
 	const [pageCount, setpageCount] =  useState(1);
-	const limits = 10;
+	const limit = 10;
 	const type = 'USER';
 	// User API Integration
 	useEffect(() => {
@@ -32,7 +32,7 @@ function User() {
 		}
 		var config = {
 		method: "get",
-		url: `${GLOBALS.BASE_URL}/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
+		url: `${GLOBALS.BASE_URL}/user/get?page=${currentPage}&limit=${limit}&type=${type}`,
 	 	headers: {
 			"x-auth-token":
 			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
@@ -46,7 +46,7 @@ function User() {
 			const filterUser = response.data.data.results;
 			const total = response.data.total;
 			//console.log('dsfasd',total);
-			setpageCount(Math.ceil(total/limits));
+			setpageCount(Math.ceil(total/limit));
 			setdata(filterUser);
 			
 		})
@@ -131,11 +131,11 @@ function User() {
                         <tr key={index}>
 							<th scope="row">{index + 1}</th>
 							<td>
-								{item.firstName} {item.lastName}
+								{item.firstName ==null ? 'NA' : item.firstName } {item.lastName}
 							</td>
 							<td>{item.mobile}</td>
-							<td>{item.email}</td>
-							<td>{item.gender}</td>
+							<td>{item.email ==null ? 'NA' : item.email }</td>
+							<td>{item.gender ==null ? 'NA' : item.gender }</td>
 							<td>
 								{/* 0- Public Profile, 1- Private Profile */}
 								<Badge className="shadow" style={{backgroundColor: item.anonymous === 1 ? "green" : "red"}}>

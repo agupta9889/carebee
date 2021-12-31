@@ -61,7 +61,9 @@ function Login({ setToken }){
         .then(function (response) {
             console.log(response.data.data , response.data.token );
             setToken(response.data.token)
+            localStorage.setItem('userToken', JSON.stringify(response.data.token))
             localStorage.setItem('userdata', JSON.stringify(response.data))
+            GLOBALS.USER_TOKEN = response.data.token;
             window.location.href = "/dashboard";
         })
         .catch(function (error) {

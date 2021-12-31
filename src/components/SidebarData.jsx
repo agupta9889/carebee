@@ -33,23 +33,23 @@ export const SidebarData = [
 },
 {
 	title: "Availability",
-	path: "#",
+	path: "/manage-availability",
 	icon: <FaIcons.FaClock />,
-	iconClosed: <RiIcons.RiArrowDownSFill />,
-	iconOpened: <RiIcons.RiArrowUpSFill />,
+	// iconClosed: <RiIcons.RiArrowDownSFill />,
+	// iconOpened: <RiIcons.RiArrowUpSFill />,
 
-	subNav: [
-	{
-		title: "Add Availability",
-		path: "/add-availability",
-		icon: <IoIcons.IoIosPeople />,
-	},
-	{
-		title: "Manage Availability",
-		path: "/manage-availability",
-		icon: <IoIcons.IoIosPaper />,
-	},
-	],
+	// subNav: [
+	// {
+	// 	title: "Add Availability",
+	// 	path: "/add-availability",
+	// 	icon: <IoIcons.IoIosPeople />,
+	// },
+	// {
+	// 	title: "Manage Availability",
+	// 	path: "/manage-availability",
+	// 	icon: <IoIcons.IoIosPaper />,
+	// },
+	// ],
 },
 {
 	title: "Users",

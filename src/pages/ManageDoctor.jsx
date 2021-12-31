@@ -4,9 +4,9 @@ import * as FaIcons from "react-icons/fa";
 import { Container, Row, Col, Table, Button, Badge, Input } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import ReactTooltip from "react-tooltip";
-import axios from "axios";
 import ReactPaginate from "react-paginate";
-import GLOBALS from '../constants/global';
+import doctorServices from "../services/doctor"
+import filterServices from "../services/filter"
 
 const ManageDoctor = () => {
 
@@ -21,33 +21,23 @@ const ManageDoctor = () => {
 	// API Integration
 	const [data, setState] = useState();
 	const [pageCount, setpageCount] =  useState(1);
-	const limits = 10;
+	const limit = 10;
 	const type = 'DOCTOR';
 	
 	useEffect(() => {
-		getDoctor();
+		getDoctor(1, limit, type);
 	}, []);
-		
-	const getDoctor = async (currentPage) => {
+	
+	const getDoctor = async (currentPage, limit, type) => {
 		if(currentPage == undefined){
 			currentPage = 1 ;
 		}
-		var config = {
-		  method: 'get',
-		  url: `${GLOBALS.BASE_URL}/user/get?page=${currentPage}&limit=${limits}&type=${type}`,
-		  headers: { 
-			'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
-			'Content-Type': 'application/json'
-		  },
-		};
-		
-		axios(config)
+		doctorServices.get(currentPage, limit, type)
 		.then(response => {
 		 	// console.log('Response in doctor list:::', response.data.data);
 		  	const filterDoctor = response.data.data.results;
 		  	const total = response.data.total;
-			//console.log('dsfasd',total);
-			setpageCount(Math.ceil(total/limits));
+			setpageCount(Math.ceil(total/limit));
 		  	setState(filterDoctor);
 		})
 		.catch(function (error) {
@@ -58,35 +48,23 @@ const ManageDoctor = () => {
 	const handlePageClick = async (data) =>{
 		const currentPage = data.selected + 1
 		//console.log('pageination Number', currentPage);
-		const usersFromServer = await getDoctor(currentPage);
+		const usersFromServer = await getDoctor(currentPage, limit, type);
 		setState(usersFromServer);
 	}
 	// Search API
 	const search = async (data) => {
 		if (data.length > 0) {
-
-		var config = {
-			method: 'get',
-			url: `${GLOBALS.BASE_URL}/user/search/` + data,
-			headers: { 
-			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
-			  'Content-Type': 'application/json'
-			},
-		   
-		  };
-		  
-		  axios(config)
-		  .then(response => {
-			//console.log('Search Data Response :::', response.data.data);
-			const searchUser = response.data.data.filter((user) => user.type === "DOCTOR");
-			setState(searchUser);
-			
-		  })
-		  .catch(function (error) {
-			console.log(error);
-		  });
+			filterServices.searchData(data)
+			.then(response => {
+				//console.log('Search Data Response :::', response.data.data);
+				const searchUser = response.data.data.filter((user) => user.type === type);
+				setState(searchUser);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		} else {
-			getDoctor();
+			getDoctor(1, limit, type);
 		}
 	}
 	return (

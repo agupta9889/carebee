@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import { Container, Row, Col, Button, FormGroup, Label, Input, Form} from "reactstrap";
-import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
-import GLOBALS from '../constants/global';
+import doctorServices from "../services/doctor";
 
 export const AddDoctor = () => {
 
@@ -65,16 +64,7 @@ export const AddDoctor = () => {
 			"about": about,
 		});
 
-		var config = {
-			method: 'post',
-			url: `${GLOBALS.BASE_URL}/user/create`,
-			headers: { 
-				'Content-Type': 'application/json'
-			},
-			data : data
-		};
-
-		axios(config)
+		doctorServices.insert(data)
 		.then(function (response) {
 
 			console.log(JSON.stringify(response.data));

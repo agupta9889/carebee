@@ -5,6 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import Sidebar from "../components/Sidebar";
 import GLOBALS from '../constants/global';
+import doctorServices from "../services/doctor"
 
 export const EditDoctor = () => {
 
@@ -48,22 +49,9 @@ export const EditDoctor = () => {
 			"experience": experience,
 			"about": about,
 		});
-
-		var config = {
-			method: 'PUT',
-			url: `${GLOBALS.BASE_URL}/user/updatebyid/` + id,
-			headers: { 
-				'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWRmMzNkZGMyMjQ1MzBhNmM4MDMwZCIsImlhdCI6MTYzODc4OTk2MywiZXhwIjo2ODIyNzg5OTYzfQ.Gj35dbcEu_MtOhcOUMT5_uiqqlU05NRVTQ89sTyvUjA', 
-				'Content-Type': 'application/json'
-			  },
-			data : data
-		};
-
-		axios(config)
+		doctorServices.update(id, data)
 		.then(function (response) {
-
-			console.log('Doctor Profile updated', JSON.stringify(response.data));
-			
+			//console.log('Doctor Profile updated', JSON.stringify(response.data));
 			swal({
 				title: "Success!",
 				text: "Records have been updated successfully!",
