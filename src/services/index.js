@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let URL = 'https://api.betsports9.com/api/v1';
+let URL = 'http://3.110.197.122:5000/api';  // Live API URL
 if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  URL = 'http://192.168.137.1:5000/api';
+  URL = 'http://192.168.137.1:5000/api'; // Development URL
 }
 
 const Axios = () => {

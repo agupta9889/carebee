@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table, Badge, Button, Input } from "reactstrap";
-import axios from "axios";
 import * as FaIcons from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
 import Sidebar from "../components/Sidebar";
 import ReactPaginate from "react-paginate";
-import GLOBALS from '../constants/global';
 import { useHistory } from "react-router-dom";
-
+import userService from "../services/user";
+import filterServices from "../services/filter";
 
 function User() {
 	
@@ -17,7 +16,7 @@ function User() {
 	const type = 'USER';
 	// User API Integration
 	useEffect(() => {
-		getUserDetails();
+		getUserDetails(1, limit, type);
 	}, []);
 	let history = useHistory();
 
@@ -30,67 +29,42 @@ function User() {
 		if(currentPage == undefined){
 			currentPage = 1 ;
 		}
-		var config = {
-		method: "get",
-		url: `${GLOBALS.BASE_URL}/user/get?page=${currentPage}&limit=${limit}&type=${type}`,
-	 	headers: {
-			"x-auth-token":
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
-			"Content-Type": "application/json",
-		},
-		};
-
-		axios(config)
+		userService.getData(currentPage, limit, type)
 		.then((response) => {
-			
 			const filterUser = response.data.data.results;
 			const total = response.data.total;
 			//console.log('dsfasd',total);
 			setpageCount(Math.ceil(total/limit));
 			setdata(filterUser);
-			
 		})
 		.catch(function (error) {
 			console.log(error);
 		});
 	 
-	  }
+	}
+
  	const handlePageClick = async (data) =>{
 		const currentPage = data.selected + 1
 		//console.log('pageination Number', currentPage);
-		const usersFromServer = await getUserDetails(currentPage);
+		const usersFromServer = await getUserDetails(currentPage, limit, type);
 		setdata(usersFromServer);
 	}
 
-	
 	const search = async (data) => {
 		if (data.length > 0) {
-
-		var config = {
-			method: 'get',
-			url: `${GLOBALS.BASE_URL}/user/search/` + data,
-			headers: { 
-			  'x-auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo', 
-			  'Content-Type': 'application/json'
-			},
-		   
-		  };
-		  
-		  axios(config)
-		  .then(response => {
+			filterServices.searchData(data)
+			.then(response => {
 			//console.log('Search Data Response :::', response.data.data);
 			const searchUser = response.data.data.filter((user) => user.type === "USER");
 			setdata(searchUser);
-			
-		  })
-		  .catch(function (error) {
+			})
+			.catch(function (error) {
 			console.log(error);
-		  });
+			});
 		} else {
-			getUserDetails();
+			getUserDetails(1, limit, type);
 		}
 	}
-
 
   return (
     <>

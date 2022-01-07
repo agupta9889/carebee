@@ -3,16 +3,15 @@ import companyLogo from '../assets/images/Carebeewhite.png';
 import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
 import { Container, Row, Col, Button, FormGroup,Input, Form } from "reactstrap";
 import "../login/Login.css";
-import axios from "axios";
 import swal from "sweetalert";
 import GLOBALS from '../constants/global';
+import loginServices from "../services/login";
 
 function Login({ setToken }){
     
     // Login API Integration
     const [username, setUserName ] = useState('');
     const [password, setPassword] = useState('');
-    
     const [session, setSession] = useState();
 	
 	useEffect(() => {
@@ -20,7 +19,6 @@ function Login({ setToken }){
 		// console.log("data in effect :::: ",JSON.parse(data));
 		setSession(JSON.parse(data))
 	});
-
 
     const validation = (evt) =>{
         evt.preventDefault();
@@ -48,16 +46,7 @@ function Login({ setToken }){
           "password": password
         });
         
-        var config = {
-          method: 'post',
-          url: `${GLOBALS.BASE_URL}/user/login`,
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        //console.log('arung data', config)
-        await axios(config)
+        loginServices.getlogin(data)
         .then(function (response) {
             console.log(response.data.data , response.data.token );
             setToken(response.data.token)

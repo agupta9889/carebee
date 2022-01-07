@@ -5,7 +5,6 @@ import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
 import availabilityService from "../services/availability";
 
-
 const ManageAvailability = () => {
 	
 	// API Integration for Load data

@@ -1,48 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import GLOBALS from "../constants/global";
 import { useParams } from "react-router";
-import axios from "axios";
 import companyLogoIcon from "../assets/images/Carebee-blue-icon.png";
 import { Container, Row, Col, Media, Card, CardBody } from "reactstrap";
 import moment from "moment";
+import userService from "../services/user";
 
 const MoodTracker = () => {
   const [userName, setUserName] = useState();
   const [moodTracker, setMoodTracker] = useState([]);
-
   const { id } = useParams();
+  
   useEffect(() => {
     userTracker();
   }, []);
 
   const userTracker = async () => {
-    var config = {
-      method: "get",
-      url: `${GLOBALS.BASE_URL}/user/getbyid/` + id,
-      headers: {
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzY4YjlhYjgyYmQwMDJkMGU0ZmFhYiIsImlhdCI6MTYzNTE2NTk2NSwiZXhwIjo2ODE5MTY1OTY1fQ._Jy0lEA0y8ojQqauoDUKyEuujKxcZfzT55ISt2hMuZo",
-        "Content-Type": "application/json",
-      },
-    };
-
-    axios(config)
+    
+    userService.moodData(id)
       .then((response) => {
-        console.log("User Records:::::::", response.data.data);
-        console.log(
-          "User Mood Records:::::::",
-          response.data.data.userMoodTraker
-        );
+        // console.log(
+        //   "User Mood Records:::::::",
+        //   response.data.data.userMoodTraker
+        // );
         if (response.data.data) {
-			setUserName(response.data.data.firstName);
-          	setMoodTracker(response.data.data.userMoodTraker);
+			    setUserName(response.data.data.firstName);
+          setMoodTracker(response.data.data.userMoodTraker);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-  };
+  }
+
   return (
     <>
       <Sidebar />
@@ -67,8 +57,8 @@ const MoodTracker = () => {
                   <Media body className="pt-25">
                     <Media heading>
                     {
-						userName === null ? 'Private Profile' : userName
-					}
+                      userName === null ? 'Private Profile' : userName
+                    }
                     </Media>
                   </Media>
                 </Media>
@@ -106,14 +96,14 @@ const MoodTracker = () => {
                           <Col md={12}>
                             <b>Ans:</b> <span>{comment.ans}</span>
                           </Col>
-						  {comment.comment ? 
-						  	<Col md={12}>
-						  	<b>Comment:</b> <span> {comment.comment}</span>
-				  			</Col> 
-							: null
-						  }
-						   	
-						</Row>
+                          {comment.comment ? 
+                            <Col md={12}>
+                            <b>Comment:</b> <span> {comment.comment}</span>
+                            </Col> 
+                          : null
+                          }
+                            
+                        </Row>
                       );
                     })}
                   </CardBody>

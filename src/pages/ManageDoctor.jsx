@@ -5,8 +5,8 @@ import { Container, Row, Col, Table, Button, Badge, Input } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import ReactTooltip from "react-tooltip";
 import ReactPaginate from "react-paginate";
-import doctorServices from "../services/doctor"
-import filterServices from "../services/filter"
+import doctorServices from "../services/doctor";
+import filterServices from "../services/filter";
 
 const ManageDoctor = () => {
 
