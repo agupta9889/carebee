@@ -32,6 +32,25 @@ export const SidebarData = [
 	],
 },
 {
+	title: "Social Peer",
+	path: "#",
+	icon: <FaIcons.FaUserMd />,
+	iconClosed: <RiIcons.RiArrowDownSFill />,
+	iconOpened: <RiIcons.RiArrowUpSFill />,
+	subNav: [
+		{
+			title: "Add Social Peer",
+			path: "/add-socialpeer",
+			icon: <IoIcons.IoIosPeople />,
+		},
+		{
+			title: "Manage Social Peer",
+			path: "/manage-socialPeer",
+			icon: <IoIcons.IoIosPaper />,
+		},
+		],
+},
+{
 	title: "Availability",
 	path: "/manage-availability",
 	icon: <FaIcons.FaClock />,
