@@ -181,7 +181,11 @@ function User() {
 								<span>User Journals Info</span>
 							</ReactTooltip>
 							</td>
-							<td><Button outline onClick={()=>hundleMemberShip(item.id)} className="shadow view" data-tip data-for='viewJournals'><FaIcons.FaMediumM /></Button> </td>
+							<td><Button outline onClick={()=>hundleMemberShip(item.id)} className="shadow view" data-tip data-for='memberShip'><FaIcons.FaMediumM /></Button>
+							<ReactTooltip id='memberShip' type='info'>
+								<span>Member Ship Info</span>
+							</ReactTooltip>
+							 </td>
 						</tr>
                     	);
                     })

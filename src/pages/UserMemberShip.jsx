@@ -32,6 +32,7 @@ const MemberShipSelectDocAppoint = () => {
   const { id } = useParams();
   const [doctorIdAssing, setDoctorIdAssing] = useState({
     doctorID: "",
+    mobile:"",
     memberShipStatus: "",
   });
 
@@ -48,6 +49,7 @@ const MemberShipSelectDocAppoint = () => {
           setUserName(response.data.data);
           if (response?.data?.data?.memberShip) {
               setUserMemberShip(response.data.data.memberShip);
+              console.log(':::::::::::::::::::::::::', response.data.data.memberShip)
           }
           if (response.data.data.socialPeers !== undefined) {
             let data = response.data.data.socialPeers.map(
@@ -190,15 +192,15 @@ const MemberShipSelectDocAppoint = () => {
             <Card className="shadow doctor-top doctor-bottom">
               <Row>
                 <Col md={1} xs={1}></Col>
-                <Col md={6} xs={8}>
+                <Col md={8} xs={8}>
                   <FormGroup tag="fieldset">
                     <legend>Assign The Doctor</legend>
                     {doctorlst &&
                       doctorlst.map((item, index) => (
                         <>
                           <Row>
-                            <Col md={1} xs={1}></Col>
-                            <Col md={6} xs={8}>
+                            {/* <Col md={1} xs={1}></Col> */}
+                            <Col md={4} xs={8}>
                               <FormGroup check key={index}>
                                 <Label check>
                                   <Input
@@ -211,8 +213,22 @@ const MemberShipSelectDocAppoint = () => {
                                   {`${
                                     item.firstName +
                                     " " +
-                                    item.lastName +
-                                    " " +
+                                    item.lastName 
+                                  }`}
+                                </Label>
+                              </FormGroup>
+                            </Col>
+                            <Col md={4} xs={3}>
+                              <FormGroup check>
+                              <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    id="mobile"
+                                    value={item.mobile}
+                                    onChange={handleInput}
+                                  />{" "}
+                                  {`${
                                     item.mobile
                                   }`}
                                 </Label>
@@ -277,10 +293,11 @@ const MemberShipSelectDocAppoint = () => {
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Doctor ID</th>
-                        <th>MemberShip Activte</th>
+                        {/* <th>Doctor ID</th> */}
+                        <th>Mobile Number</th>
+                        <th>MemberShip yes</th>
                         <th>Created At</th>
-                        <th>MemberShip Deactivate</th>
+                        <th>MemberShip Deactivate Button</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -289,7 +306,8 @@ const MemberShipSelectDocAppoint = () => {
                             return (
                           <tr>
                             <th scope="row" key={index}>{item._id}</th>
-                            <td>{item.doctorID}</td>
+                            {/* <td>{item.doctorID}</td> */}
+                            <td>{item.mobile}</td>
                             <td
                               style={{
                                 backgroundColor:
@@ -298,7 +316,7 @@ const MemberShipSelectDocAppoint = () => {
                                     : "#edbcc1",
                               }}
                             >
-                              {item.memberShipStatus}
+                              {item.memberShipStatus === 1 ? 'Active' : 'Deactive'}
                             </td>
                             <td>{item.createdAt}</td>
                             <td onClick={() => DeactiveUserMemberShip(item._id, item.doctorID, item.memberShipStatus === 1 ? 2 : 1 )}>    
