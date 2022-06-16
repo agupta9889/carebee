@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-let URL = 'http://3.110.197.122:5000/api';  // Live API URL
+// let URL = 'http://3.110.197.122:5000/api';  // Live API URL
+let URL = 'http://43.204.6.247:5000/api';  // Live API URL
 if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   URL = 'http://localhost:5000/api'; // Development URL
+  //  URL = 'http://43.204.6.247:5000/api';  // Live API URL
+
 }
 
 const Axios = () => {

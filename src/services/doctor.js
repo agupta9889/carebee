@@ -12,6 +12,12 @@ export default {
     update(id, data) {
         return Service.put('/user/updatebyid/' +id, data);
     },
+    updateProfiles(id, formData) {
+        return Service.put('/user/uploadprofilebyid/' +id, formData,  { headers: {
+            "Content-Type": "multipart/form-data",
+        }
+        });
+    },
 
     profile(id) {
         return Service.get('/user/getbyid/' +id);

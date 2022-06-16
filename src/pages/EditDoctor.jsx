@@ -200,6 +200,12 @@ return (
 								<option value="Punjabi" >Punjabi</option>
 								<option value="Urdu" >Urdu</option>
 								<option value="Gujrati" >Gujrati</option>
+								<option value="Assamese">Assamese</option>
+								<option value="Bengali">Bengali</option>
+								<option value="Marathi">Marathi</option>
+								<option value="Odia">Odia</option>
+								<option value="Kannada">Kannada</option>
+								<option value="Telugu">Telugu</option>
 							</Input>
 						</FormGroup>
 					</Col>

@@ -17,7 +17,8 @@ body {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     color: #fff;
-    padding: 15px;
+    padding: 155px;
+    /* padding: 15px; */
     text-align: center;
   }
   
@@ -38,8 +39,8 @@ body {
   }
   
   .profile-img img {
-    border-radius: 50%;
-    /* animation: mymove 2s infinite; */
+    /* border-radius: 50%; */
+    /* animation: mymove 1s infinite; */
   }
   
   @keyframes mymove {

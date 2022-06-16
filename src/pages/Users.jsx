@@ -24,6 +24,30 @@ function User() {
 		// alert(data);
 		history.push("/mood-tracker/" +data);
 	}
+	function hundleMemberShip(data){
+		// alert(data);
+		history.push("/member-ship/" +data);
+	}
+	function hundlePesonalData(data){
+		// alert(data);
+		history.push("/personal-data/" +data);
+	}
+	function hundleUserPromptData(data){
+		// alert(data);
+		history.push("/userPrompt-data/" +data);
+	}
+	function hundleGoalData(data){
+		// alert(data);
+		history.push("/goal-data/" +data);
+	}
+	function hundleBookAppointmentData(data){
+		// alert(data);
+		history.push("/bookAppointment-data/" +data);
+	}
+	function hundleJournalsData(data){
+		// alert(data);
+		history.push("/userjournals-data/" +data);
+	}
 
 	const getUserDetails = async (currentPage) => {
 		if(currentPage == undefined){
@@ -96,6 +120,7 @@ function User() {
 				  <th>Anonymous</th>
                   <th>Status</th>
 				  <th>View</th>
+				  <th>Member Ship</th>
 				</tr>
               </thead>
               <tbody>
@@ -130,7 +155,33 @@ function User() {
 							<ReactTooltip id='viewD' type='info'>
 								<span>Mood Tracker</span>
 							</ReactTooltip>
+							&nbsp;&nbsp;
+							<Button outline onClick={()=>hundlePesonalData(item.id)} className="shadow view" data-tip data-for='viewPer'><FaIcons.FaInfo /></Button> 
+							<ReactTooltip id='viewPer' type='info'>
+								<span>personal data</span>
+							</ReactTooltip>
+							&nbsp;&nbsp;
+							<Button outline onClick={()=>hundleUserPromptData(item.id)} className="shadow view" data-tip data-for='viewPrpm'><FaIcons.FaUserMd /></Button> 
+							<ReactTooltip id='viewPrpm' type='info'>
+								<span>User Prompt</span>
+							</ReactTooltip>
+							&nbsp;&nbsp;
+							<Button outline onClick={()=>hundleGoalData(item.id)} className="shadow view" data-tip data-for='viewGoal'><FaIcons.FaDotCircle /></Button> 
+							<ReactTooltip id='viewGoal' type='info'>
+								<span>Goal</span>
+							</ReactTooltip>
+							&nbsp;&nbsp;
+							<Button outline onClick={()=>hundleBookAppointmentData(item.id)} className="shadow view" data-tip data-for='viewBookA'><FaIcons.FaHospital /></Button> 
+							<ReactTooltip id='viewBookA' type='info'>
+								<span>Booking Appointment</span>
+							</ReactTooltip>
+							&nbsp;&nbsp;
+							<Button outline onClick={()=>hundleJournalsData(item.id)} className="shadow view" data-tip data-for='viewJournals'><FaIcons.FaFileWord /></Button> 
+							<ReactTooltip id='viewJournals' type='info'>
+								<span>User Journals Info</span>
+							</ReactTooltip>
 							</td>
+							<td><Button outline onClick={()=>hundleMemberShip(item.id)} className="shadow view" data-tip data-for='viewJournals'><FaIcons.FaMediumM /></Button> </td>
 						</tr>
                     	);
                     })

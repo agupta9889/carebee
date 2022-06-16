@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from "react";
-import companyLogo from '../assets/images/Carebeewhite.png';
-import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
+import companyLogo from '../assets/images/white-png.png';
+// import companyLogo from '../assets/images/Carebeewhite.png';
+// import companyLogoIcon from '../assets/images/Carebee-blue-icon.png';
+import companyLogoIcon from '../assets/images/blue-png-only-logo.png';
 import { Container, Row, Col, Button, FormGroup,Input, Form } from "reactstrap";
 import "../login/Login.css";
 import swal from "sweetalert";
@@ -78,13 +80,14 @@ function Login({ setToken }){
        
             <Container className="login-container">  
                 <Row>
+                    {/* <Col sm="6" className="ads"> */}
                     <Col sm="6" className="ads">
                         <img src={companyLogo} className="logo" alt="logo" />   
                     </Col>
                     <Col sm="6" >
                         <div className="login-form">
                             <div className="profile-img">
-                                <img src={companyLogoIcon} className="logo-icon" alt="logo" />    
+                                {/* <img src={companyLogoIcon} className="logo-icon" alt="logo" />     */}
                             </div>
                             <h3>Login</h3>
                         </div>
