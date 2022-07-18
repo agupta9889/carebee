@@ -80,5 +80,24 @@ export const SidebarData = [
 	path: "/appointments",
 	icon: <FaIcons.FaUserClock/>,
 },
+{
+	title: "Membership Plan",
+	path: "#",
+	icon: <FaIcons.FaClock />,
+	iconClosed: <RiIcons.RiArrowDownSFill />,
+	iconOpened: <RiIcons.RiArrowUpSFill />,
 
+	subNav: [
+	{
+		title: "1499",
+		path: "/plan1499",
+		icon: <IoIcons.IoIosPaper />,
+	},
+	{
+		title: "2499",
+		path: "/plan2499",
+		icon: <IoIcons.IoIosPeople />,
+	},
+	],
+},
 ];

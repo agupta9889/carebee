@@ -23,6 +23,7 @@ import moment from "moment";
 import userService from "../services/user";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import { faLessThanEqual } from "@fortawesome/free-solid-svg-icons";
 
 const MemberShipSelectDocAppoint = () => {
   const [doctorlst, setDoctorList] = useState();
@@ -49,7 +50,8 @@ const MemberShipSelectDocAppoint = () => {
           setUserName(response.data.data);
           if (response?.data?.data?.memberShip) {
               setUserMemberShip(response.data.data.memberShip);
-              console.log(':::::::::::::::::::::::::', response.data.data.memberShip)
+              console.log(':::::::::::::::::::::::::', response.data.data)
+              // return false;
           }
           if (response.data.data.socialPeers !== undefined) {
             let data = response.data.data.socialPeers.map(
@@ -213,39 +215,14 @@ const MemberShipSelectDocAppoint = () => {
                                   {`${
                                     item.firstName +
                                     " " +
-                                    item.lastName 
+                                    item.lastName + " ( " + item.mobile + " )" 
                                   }`}
                                 </Label>
                               </FormGroup>
                             </Col>
                             <Col md={4} xs={3}>
-                              <FormGroup check>
-                              <Label check>
-                                  <Input
-                                    type="radio"
-                                    name="radio1"
-                                    id="mobile"
-                                    value={item.mobile}
-                                    onChange={handleInput}
-                                  />{" "}
-                                  {`${
-                                    item.mobile
-                                  }`}
-                                </Label>
-                              </FormGroup>
                             </Col>
                             <Col md={4} xs={3}>
-                              <FormGroup check>
-                                <Label check>
-                                  <Input
-                                    type="checkbox"
-                                    id="memberShipStatus"
-                                    value={1}
-                                    onChange={handleInput}
-                                  />{" "}
-                                  Member Ship
-                                </Label>
-                              </FormGroup>
                             </Col>
                           </Row>
                         </>
@@ -292,9 +269,8 @@ const MemberShipSelectDocAppoint = () => {
                   <Table>
                     <thead>
                       <tr>
-                        <th>#</th>
-                        {/* <th>Doctor ID</th> */}
-                        <th>Mobile Number</th>
+                        <th>User Name</th>
+                        <th>Doctor Name</th>
                         <th>MemberShip yes</th>
                         <th>Created At</th>
                         <th>MemberShip Deactivate Button</th>
@@ -305,9 +281,9 @@ const MemberShipSelectDocAppoint = () => {
                         userMemberShip.map((item, index) => {
                             return (
                           <tr>
-                            <th scope="row" key={index}>{item._id}</th>
+                            <th scope="row" key={index}>{userName.firstName +" "+userName.lastName}</th>
                             {/* <td>{item.doctorID}</td> */}
-                            <td>{item.mobile}</td>
+                            <td>{item.doctorName}</td>
                             <td
                               style={{
                                 backgroundColor:

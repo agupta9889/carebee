@@ -24,6 +24,8 @@ import UserBookAppointment from "./pages/UserBookAppointmentData";
 import UserJournalsData from "./pages/UserJournalsData";
 import UserProfilesDetails from "./pages/UserProfilesDetails";
 import UserMemberShip from "./pages/UserMemberShip";
+import Plan1499 from "./pages/Plan1499";
+import Plan2499 from "./pages/Plan2499";
 
 function App() {
 
@@ -31,7 +33,6 @@ function App() {
 	
 	useEffect(() => {
 		const data = localStorage.getItem('userdata');
-		// console.log("data in effect :::: ",JSON.parse(data));
 		setToken(JSON.parse(data))
 	}, []);
 
@@ -65,12 +66,12 @@ function App() {
 					<Route path="/add-socialpeer" exact component={AddSocialPeer} />
 					<Route path="/manage-socialPeer" exact component={ManageSocialPeer} />
 					<Route path="/edit-socialPeer/:id" exact component={EditSocialPeer} />
+					<Route path="/plan1499" exact component={Plan1499} />
+					<Route path="/plan2499" exact component={Plan2499} />
 				</Switch>
 			</Router>
-			
 		</>
 	);
-  
 }
 
 export default App;

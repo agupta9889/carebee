@@ -30,5 +30,11 @@ export default {
     },
     memberShipUpdate(id, data){
         return Service.put('/user/updateMemberShip/' +id, data)
-    }
+    },
+    getPlanData(type) {
+        return Service.get('user/userPlanData?type='+type);
+    },
+    getAppointmentDetails(type) {
+        return Service.get('user/userAppointmentData?type='+type);
+    },
 };

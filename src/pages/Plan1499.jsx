@@ -3,14 +3,15 @@ import { Container, Row, Col, Table, Badge } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import userService from "../services/user";
 
-function Appointments() {
-	
+
+function Plan1499() {
 	const [data, setdata] = useState();
+	const type = '1499';
 	useEffect(() => {
-		getAppointmentData();
+		getPlanDetails(type);
 	}, []);
-	const getAppointmentData = async () => {
-		userService.getAppointmentDetails()
+	const getPlanDetails = async () => {
+		userService.getPlanData(type)
 		.then((response) => {
 			const filterUser = response.data.data;
 			setdata(filterUser);
@@ -19,26 +20,6 @@ function Appointments() {
 			console.log(error);
 		});	 
 	}
-
-	// const data1 = [{
-	// 	name : "Patient-1",
-	// 	service : "Fever",
-	// 	doctor : "Doctor-1",
-	// 	date : "27-Nov-21",
-	// 	time : "10:30 am",
-	// 	status : "Booked",
-
-	// },
-	// {
-	// 	name : "Patient-2",
-	// 	service : "Pain",
-	// 	doctor : "Doctor-2",
-	// 	date : "27-Nov-21",
-	// 	time : "10:50 am",
-	// 	status : "Canceled",
-
-	// },]
-	// console.log(data1);
 
 	return (
 		<>
@@ -51,12 +32,12 @@ function Appointments() {
 						<Table id="patientTable" responsive>
 							<thead>
 								<tr>
-								<th>#</th>
+									<th>#</th>
 									<th>User Name</th>
 									<th>Plan</th>
 									<th>Created At</th>
 									<th>Expiry Date</th>
-									<th>Doctor Name</th>							
+									<th>Doctor Name</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,7 +49,7 @@ function Appointments() {
 											
 											<tr key={index}>
 											<th scope="row">{index + 1}</th>
-											<td>{i.name}</td>
+													<td>{i.name}</td>
 													<td>{i.amount}</td>
 													<td>{i.createdAt}</td>
 													<td>{i.expiry_date}</td>
@@ -88,4 +69,4 @@ function Appointments() {
 	);
 }
 
-export default Appointments;
+export default Plan1499;
