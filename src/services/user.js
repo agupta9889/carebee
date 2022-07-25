@@ -34,7 +34,7 @@ export default {
     getPlanData(type) {
         return Service.get('user/userPlanData?type='+type);
     },
-    getAppointmentDetails(type) {
-        return Service.get('user/userAppointmentData?type='+type);
+    getAppointmentDetails(currentPage, limit, type) {
+        return Service.get('user/userAppointmentData?page=' +currentPage+ '&limit=' +limit+ '&type='+type);
     },
 };
