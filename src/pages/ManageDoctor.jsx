@@ -34,7 +34,6 @@ const ManageDoctor = () => {
 		}
 		doctorServices.get(currentPage, limit, type)
 		.then(response => {
-		 	// console.log('Response in doctor list:::', response.data.data);
 		  	const filterDoctor = response.data.data.results;
 		  	const total = response.data.total;
 			setpageCount(Math.ceil(total/limit));
@@ -43,7 +42,6 @@ const ManageDoctor = () => {
 		.catch(function (error) {
 		  console.log(error);
 		});
-
 	}
 	const handlePageClick = async (data) =>{
 		const currentPage = data.selected + 1
