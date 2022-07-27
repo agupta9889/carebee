@@ -28,7 +28,7 @@ function Plan2499() {
 			<Row>
 					<Col md={2} xs={1}></Col>
 					<Col md={10} xs={10} className="table-container">
-						<h6>Appointments</h6><hr />
+						<h6>Plan 2499</h6><hr />
 						<Table id="patientTable" responsive>
 							<thead>
 								<tr>
