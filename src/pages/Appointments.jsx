@@ -63,7 +63,7 @@ function Appointments() {
 					<Col md={10} xs={10} className="table-container">
 					<Row>
 						<Col md={7} xs={12} >
-							<h6>Appointments</h6>
+							<h6>Appointment</h6>
 						</Col>
 						<Col md={5} xs={12} className="d-flex justify-content-end align-items-center mb-2">
 							<Input name="search" 
