@@ -77,8 +77,9 @@ function Appointments() {
 								<th>#</th>
 									<th>User Name</th>
 									<th>Plan</th>
-									<th>Created At</th>
-									<th>Expiry Date</th>
+									<th>Date</th>
+									<th>Start Time</th>
+									<th>End Time</th>
 									<th>Doctor Name</th>							
 								</tr>
 							</thead>
@@ -86,17 +87,16 @@ function Appointments() {
 								{
 									data ? 
 									data.map((i, index) => {
-
 										return (
-											
 											<tr key={index}>
 											<th scope="row">{index + 1}</th>
 											<td>{i.name}</td>
-													<td>{i.amount}</td>
-													<td>{i.createdAt}</td>
-													<td>{i.expiry_date}</td>
-													<td>{i.doctorName}</td>
-												</tr>
+											<td>{i.amount}</td>
+											<td>{i.date}</td>
+											<td>{i.startTime}</td>
+											<td>{i.endTime}</td>
+											<td>{i.doctorName}</td>
+										</tr>
 										);
 									}) : 
 									null
